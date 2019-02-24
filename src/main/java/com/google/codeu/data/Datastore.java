@@ -85,7 +85,6 @@ public class Datastore {
    *
    * @return a list of messages posted by the user, or empty list if user has never posted a
    *     message. List is sorted by time descending.
-   * Does the same thing as the one above it
    */
   public List<Message> getAllMessages() {
     List<Message> messages = new ArrayList<>();
