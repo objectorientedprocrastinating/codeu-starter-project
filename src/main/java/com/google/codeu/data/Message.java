@@ -21,6 +21,8 @@ import java.util.UUID;
 /** A single message posted by a user. */
 public class Message {
 
+  //add recipient variable to expand the class
+  private String recipient;
   private UUID id;
   private String user;
   private String text;
@@ -30,15 +32,18 @@ public class Message {
    * Constructs a new {@link Message} posted by {@code user} with {@code text} content. Generates a
    * random ID and uses the current system time for the creation time.
    */
-  public Message(String user, String text) {
-    this(UUID.randomUUID(), user, text, System.currentTimeMillis());
+  //add recipient to the constructor
+  public Message(String user, String text, String recipient) {
+    this(UUID.randomUUID(), user, text, System.currentTimeMillis(), recipient);
   }
 
-  public Message(UUID id, String user, String text, long timestamp) {
+  //add recipient to the constructor
+  public Message(UUID id, String user, String text, long timestamp, String recipient) {
     this.id = id;
     this.user = user;
     this.text = text;
     this.timestamp = timestamp;
+    this.recipient = recipient;
   }
 
   public UUID getId() {
@@ -56,4 +61,7 @@ public class Message {
   public long getTimestamp() {
     return timestamp;
   }
+
+  //add getter for recipient that provides access to the field
+  public String getRecipient(){ return recipient; }
 }
