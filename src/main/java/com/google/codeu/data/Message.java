@@ -29,15 +29,21 @@ public class Message {
   private long timestamp;
 
   /**
-   * Constructs a new {@link Message} posted by {@code user} with {@code text} content. Generates a
+   * Constructs a new {@link Message} posted by {@code user} with {@code text} content to {@code recipient}. Generates a
    * random ID and uses the current system time for the creation time.
    */
-  //add recipient to the constructor
   public Message(String user, String text, String recipient) {
     this(UUID.randomUUID(), user, text, System.currentTimeMillis(), recipient);
   }
 
-  //add recipient to the constructor
+  /**
+   * Constructs a new message.
+   * @param id A non-null uuid to uniquely identify the constructed message.
+   * @param user Sender of the message
+   * @param text Content of the message
+   * @param timestamp Time of sending out the message
+   * @param recipient Recipient of the message
+   */
   public Message(UUID id, String user, String text, long timestamp, String recipient) {
     this.id = id;
     this.user = user;
@@ -46,22 +52,36 @@ public class Message {
     this.recipient = recipient;
   }
 
+  /**
+   * @return current non-null UUID
+   */
   public UUID getId() {
     return id;
   }
 
+  /**
+   * @return the sender of the user
+   */
   public String getUser() {
     return user;
   }
 
+  /**
+   * @return the content of the message
+   */
   public String getText() {
     return text;
   }
 
+  /**
+   * @return time of message is sent
+   */
   public long getTimestamp() {
     return timestamp;
   }
 
-  //add getter for recipient that provides access to the field
+  /**
+   * @return recipient of the message
+   */
   public String getRecipient(){ return recipient; }
 }
