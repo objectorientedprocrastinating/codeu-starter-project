@@ -22,6 +22,32 @@ limitations under the License.
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/user-page.css">
     <script src="/js/user-page-loader.js"></script>
+    <Style>
+      body{
+        background-image: url("bg.jpg"); 
+      }
+      li {
+        float: left;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      div{
+        color:white;
+      }
+      #page-title{
+        color: white;
+      }
+      #message-form{
+        color: white;
+      }
+
+    </Style>
   </head>
   <body onload="buildUI();">
     <nav>
@@ -29,8 +55,9 @@ limitations under the License.
         <li><a href="/">Home</a></li>
       </ul>
     </nav>
+    <hr style="width: 1440px">
+  
     <h1 id="page-title">User Page</h1>
-
     <form id="message-form" action="/messages" method="POST" class="hidden">
       Enter a new message:
       <br/>
@@ -39,7 +66,6 @@ limitations under the License.
       <input type="submit" value="Submit">
     </form>
     <hr/>
-
     <div id="message-container">Loading...</div>
 
   </body>
