@@ -21,7 +21,7 @@ import java.util.UUID;
 /** A single message posted by a user. */
 public class Message {
 
-  //add recipient variable to expand the class
+  // add recipient variable to expand the class
   private String recipient;
   private UUID id;
   private String user;
@@ -29,8 +29,8 @@ public class Message {
   private long timestamp;
 
   /**
-   * Constructs a new {@link Message} posted by {@code user} with {@code text} content to {@code recipient}. Generates a
-   * random ID and uses the current system time for the creation time.
+   * Constructs a new {@link Message} posted by {@code user} with {@code text} content to {@code
+   * recipient}. Generates a random ID and uses the current system time for the creation time.
    */
   public Message(String user, String text, String recipient) {
     this(UUID.randomUUID(), user, text, System.currentTimeMillis(), recipient);
@@ -38,6 +38,7 @@ public class Message {
 
   /**
    * Constructs a new message.
+   *
    * @param id A non-null uuid to uniquely identify the constructed message.
    * @param user Sender of the message
    * @param text Content of the message
@@ -52,36 +53,28 @@ public class Message {
     this.recipient = recipient;
   }
 
-  /**
-   * @return current non-null UUID
-   */
+  /** @return current non-null UUID */
   public UUID getId() {
     return id;
   }
 
-  /**
-   * @return the sender of the user
-   */
+  /** @return the sender of the user */
   public String getUser() {
     return user;
   }
 
-  /**
-   * @return the content of the message
-   */
+  /** @return the content of the message */
   public String getText() {
     return text;
   }
 
-  /**
-   * @return time of message is sent
-   */
+  /** @return time of message is sent */
   public long getTimestamp() {
     return timestamp;
   }
 
-  /**
-   * @return recipient of the message
-   */
-  public String getRecipient(){ return recipient; }
+  /** @return recipient of the message */
+  public String getRecipient() {
+    return recipient;
+  }
 }
