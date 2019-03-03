@@ -34,37 +34,38 @@ function setPageTitle() {
  */
 function showMessageFormIfViewingSelf() {
   fetch('/login-status')
-      .then((response) => {
-        return response.json();
-      })
-      .then((loginStatus) => {
-        if (loginStatus.isLoggedIn &&
-            loginStatus.username == parameterUsername) {
-          const messageForm = document.getElementById('message-form');
-          messageForm.classList.remove('hidden');
-        }
-      });
+    .then((response) => {
+      return response.json();
+    })
+    .then((loginStatus) => {
+      if (loginStatus.isLoggedIn &&
+        loginStatus.username == parameterUsername) {
+        const messageForm = document.getElementById('message-form');
+        messageForm.classList.remove('hidden');
+      }
+    });
+  document.getElementById('about-me-form').classList.remove('hidden');
 }
 
 /** Fetches messages and add them to the page. */
 function fetchMessages() {
   const url = '/messages?user=' + parameterUsername;
   fetch(url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((messages) => {
-        const messagesContainer = document.getElementById('message-container');
-        if (messages.length == 0) {
-          messagesContainer.innerHTML = '<p>This user has no posts yet.</p>';
-        } else {
-          messagesContainer.innerHTML = '';
-        }
-        messages.forEach((message) => {
-          const messageDiv = buildMessageDiv(message);
-          messagesContainer.appendChild(messageDiv);
-        });
+    .then((response) => {
+      return response.json();
+    })
+    .then((messages) => {
+      const messagesContainer = document.getElementById('message-container');
+      if (messages.length == 0) {
+        messagesContainer.innerHTML = '<p>This user has no posts yet.</p>';
+      } else {
+        messagesContainer.innerHTML = '';
+      }
+      messages.forEach((message) => {
+        const messageDiv = buildMessageDiv(message);
+        messagesContainer.appendChild(messageDiv);
       });
+    });
 }
 
 /**
@@ -76,7 +77,7 @@ function buildMessageDiv(message) {
   const headerDiv = document.createElement('div');
   headerDiv.classList.add('message-header');
   headerDiv.appendChild(document.createTextNode(
-      message.user + ' - ' + new Date(message.timestamp)));
+    message.user + ' - ' + new Date(message.timestamp)));
 
   const bodyDiv = document.createElement('div');
   bodyDiv.classList.add('message-body');
@@ -89,10 +90,27 @@ function buildMessageDiv(message) {
 
   return messageDiv;
 }
+function fetchAboutMe() {
+  const url = '/about?user=' + parameterUsername;
+  fetch(url).then((response) => {
+    return response.text();
+  }).then((aboutMe) => {
+    const aboutMeContainer = document.getElementById('about-me-container');
+    if (aboutMe == '') {
+      aboutMe = 'This user has not entered any information yet.';
+    }
+
+    aboutMeContainer.innerHTML = aboutMe;
+
+  });
+}
+
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
   setPageTitle();
+
   showMessageFormIfViewingSelf();
   fetchMessages();
+  fetchAboutMe();
 }
