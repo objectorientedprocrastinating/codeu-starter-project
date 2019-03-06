@@ -1,17 +1,15 @@
 /*
  * Copyright 2019 Google Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.google.codeu.data;
@@ -58,9 +56,8 @@ public class Datastore {
     List<Message> messages = new ArrayList<>();
 
     Query query = new Query("Message")
-            .setFilter(new Query.FilterPredicate("recipient", FilterOperator.EQUAL, recipient))
-            .addSort("timestamp", SortDirection.DESCENDING);
-    
+        .setFilter(new Query.FilterPredicate("recipient", FilterOperator.EQUAL, recipient))
+        .addSort("timestamp", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
@@ -88,7 +85,7 @@ public class Datastore {
    * Gets messages posted by a specific user.
    *
    * @return a list of messages posted by the user, or empty list if user has never posted a
-   *     message. List is sorted by time descending.
+   *         message. List is sorted by time descending.
    */
   public List<Message> getAllMessages() {
     List<Message> messages = new ArrayList<>();
@@ -117,7 +114,7 @@ public class Datastore {
 
     return messages;
   }
-  
+
   /** Stores the User in Datastore. */
   public void storeUser(User user) {
     Entity userEntity = new Entity("User", user.getEmail());
@@ -127,12 +124,12 @@ public class Datastore {
   }
 
   /**
-   * Returns the User owned by the email address, or null if no matching User was
-   * found.
+   * Returns the User owned by the email address, or null if no matching User was found.
    */
   public User getUser(String email) {
 
-    Query query = new Query("User").setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, email));
+    Query query = new Query("User")
+        .setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, email));
     PreparedQuery results = datastore.prepare(query);
     Entity userEntity = results.asSingleEntity();
     if (userEntity == null) {
