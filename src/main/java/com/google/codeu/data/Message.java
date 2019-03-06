@@ -21,7 +21,6 @@ import java.util.UUID;
 /** A single message posted by a user. */
 public class Message {
 
-  // add recipient variable to expand the class
   private String recipient;
   private UUID id;
   private String user;
