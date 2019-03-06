@@ -52,28 +52,41 @@ public class Message {
     this.recipient = recipient;
   }
 
-  /** @return current non-null UUID */
+  /**
+   * Returns current non-null UUID
+   * @return non-null UUID
+   */
   public UUID getId() {
     return id;
   }
 
-  /** @return the sender of the user */
+  /**
+   * Returns the sender of the message.
+   * @return user
+   */
   public String getUser() {
     return user;
   }
 
-  /** @return the content of the message */
+  /**
+   * Returns the content of the message
+   * @return message
+   */
   public String getText() {
     return text;
   }
 
-  /** @return time of message is sent */
+  /**
+   * Returns the time of the message is sent
+   * @return time stamp of the message
+   */
   public long getTimestamp() {
     return timestamp;
   }
 
-  /** @return recipient of the message */
-  public String getRecipient() {
-    return recipient;
-  }
+  /**
+   * Returns the recipient as a string
+   * @return recipient
+   */
+  public String getRecipient() { return recipient; }
 }
