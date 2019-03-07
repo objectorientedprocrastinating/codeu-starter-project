@@ -51,7 +51,7 @@ public class Message {
   }
 
   /**
-   * Returns current non-null UUID
+   * Returns current non-null UUID.
    * @return non-null UUID
    */
   public UUID getId() {
@@ -67,7 +67,7 @@ public class Message {
   }
 
   /**
-   * Returns the content of the message
+   * Returns the content of the message.
    * @return message
    */
   public String getText() {
@@ -75,7 +75,7 @@ public class Message {
   }
 
   /**
-   * Returns the time of the message is sent
+   * Returns the time of the message is sent.
    * @return time stamp of the message
    */
   public long getTimestamp() {
@@ -83,8 +83,10 @@ public class Message {
   }
 
   /**
-   * Returns the recipient as a string
+   * Returns the recipient as a string.
    * @return recipient
    */
-  public String getRecipient() { return recipient; }
+  public String getRecipient() {
+    return recipient;
+  }
 }
