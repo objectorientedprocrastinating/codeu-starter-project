@@ -19,39 +19,74 @@ import java.util.UUID;
 /** A single message posted by a user. */
 public class Message {
 
+  private String recipient;
   private UUID id;
   private String user;
   private String text;
   private long timestamp;
 
   /**
-   * Constructs a new {@link Message} posted by {@code user} with {@code text} content. Generates a
-   * random ID and uses the current system time for the creation time.
+   * Constructs a new {@link Message} posted by {@code user} with {@code text} content to {@code
+   * recipient}. Generates a random ID and uses the current system time for the creation time.
    */
-  public Message(String user, String text) {
-    this(UUID.randomUUID(), user, text, System.currentTimeMillis());
+  public Message(String user, String text, String recipient) {
+    this(UUID.randomUUID(), user, text, System.currentTimeMillis(), recipient);
   }
 
-  public Message(UUID id, String user, String text, long timestamp) {
+  /**
+   * Constructs a new message.
+   *
+   * @param id A non-null uuid to uniquely identify the constructed message.
+   * @param user Sender of the message
+   * @param text Content of the message
+   * @param timestamp Time of sending out the message
+   * @param recipient Recipient of the message
+   */
+  public Message(UUID id, String user, String text, long timestamp, String recipient) {
     this.id = id;
     this.user = user;
     this.text = text;
     this.timestamp = timestamp;
+    this.recipient = recipient;
   }
 
+  /**
+   * Returns current non-null UUID.
+   * @return non-null UUID
+   */
   public UUID getId() {
     return id;
   }
 
+  /**
+   * Returns the sender of the message.
+   * @return user
+   */
   public String getUser() {
     return user;
   }
 
+  /**
+   * Returns the content of the message.
+   * @return message
+   */
   public String getText() {
     return text;
   }
 
+  /**
+   * Returns the time of the message is sent.
+   * @return time stamp of the message
+   */
   public long getTimestamp() {
     return timestamp;
+  }
+
+  /**
+   * Returns the recipient as a string.
+   * @return recipient
+   */
+  public String getRecipient() {
+    return recipient;
   }
 }

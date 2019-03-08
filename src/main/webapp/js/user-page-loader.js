@@ -40,8 +40,9 @@ function showMessageFormIfViewingSelf() {
     .then((loginStatus) => {
       if (loginStatus.isLoggedIn &&
         loginStatus.username == parameterUsername) {
-        const messageForm = document.getElementById('message-form');
-        messageForm.classList.remove('hidden');
+         const messageForm = document.getElementById('message-form');
+         messageForm.action = '/messages?recipient=' + parameterUsername;
+         messageForm.classList.remove('hidden');
       }
     });
   document.getElementById('about-me-form').classList.remove('hidden');
