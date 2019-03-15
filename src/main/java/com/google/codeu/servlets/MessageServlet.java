@@ -73,7 +73,7 @@ public class MessageServlet extends HttpServlet {
       return;
     }
     String user = userService.getCurrentUser().getEmail();
-    String userText = Jsoup.clean(request.getParameter("text"), Whitelist.none());
+    String userText = Jsoup.clean(request.getParameter("text"), Whitelist.basic());
     String recipient = request.getParameter("recipient");
 
     String regex = "(https?://\\S+\\.(png|jpg))";
