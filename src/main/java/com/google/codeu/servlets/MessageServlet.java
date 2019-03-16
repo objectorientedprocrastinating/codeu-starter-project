@@ -27,6 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
+import java.net.URL;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /** Handles fetching and saving {@link Message} instances. */
 @WebServlet("/messages")
@@ -63,6 +66,26 @@ public class MessageServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
+  /* Returns true if url is valid */
+  public static boolean isValid(String url) {
+    /* Try creating a valid URL */
+    try {
+      new URL(url).toURI();
+      return true;
+    }
+
+    // If there was an Exception
+    // while creating URL object
+    catch (Exception e) {
+      return false;
+    }
+  }
+
+  private static final Pattern urlPattern = Pattern.compile(
+      "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)" + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
+          + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)",
+      Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+
   /** Stores a new {@link Message}. */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -75,11 +98,20 @@ public class MessageServlet extends HttpServlet {
     String user = userService.getCurrentUser().getEmail();
     String userText = Jsoup.clean(request.getParameter("text"), Whitelist.none());
     String recipient = request.getParameter("recipient");
-
-    String regex = "(https?://\\S+\\.(png|jpg))";
-    String replacement = "<img src=\"$1\" />";
-    String textWithImagesReplaced = userText.replaceAll(regex, replacement);
-
+    String textWithImagesReplaced = userText;
+    String regex = "(https?://\\S+\\.(png|jpg|gif))";
+    
+    Matcher matcher = urlPattern.matcher(userText);
+    while (matcher.find()) {
+      int matchStart = matcher.start(1);
+      int matchEnd = matcher.end();
+      // now you have the offsets of a URL match
+    }
+    System.out.println(regex);
+    if (isValid(regex)) {
+      String replacement = "<img src=\"$1\" />";
+      textWithImagesReplaced = userText.replaceAll(regex, replacement);
+    }
     Message message = new Message(user, textWithImagesReplaced, recipient);
     datastore.storeMessage(message);
 
