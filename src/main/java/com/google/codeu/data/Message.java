@@ -24,21 +24,26 @@ public class Message {
   private String user;
   private String text;
   private long timestamp;
+  private String imageURL;
 
   /**
-   * Constructs a new {@link Message} posted by {@code user} with {@code text} content to {@code
-   * recipient}. Generates a random ID and uses the current system time for the creation time.
+   * Constructs a new {@link Message} posted by {@code user} with {@code text}
+   * content to {@code
+   * recipient}. Generates a random ID and uses the current system time for the
+   * creation time.
    */
   public Message(String user, String text, String recipient) {
     this(UUID.randomUUID(), user, text, System.currentTimeMillis(), recipient);
+    this.imageURL = null;
   }
 
   /**
    * Constructs a new message.
    *
-   * @param id A non-null uuid to uniquely identify the constructed message.
-   * @param user Sender of the message
-   * @param text Content of the message
+   * @param id        A non-null uuid to uniquely identify the constructed
+   *                  message.
+   * @param user      Sender of the message
+   * @param text      Content of the message
    * @param timestamp Time of sending out the message
    * @param recipient Recipient of the message
    */
@@ -48,10 +53,12 @@ public class Message {
     this.text = text;
     this.timestamp = timestamp;
     this.recipient = recipient;
+    this.imageURL = null;
   }
 
   /**
    * Returns current non-null UUID.
+   * 
    * @return non-null UUID
    */
   public UUID getId() {
@@ -60,6 +67,7 @@ public class Message {
 
   /**
    * Returns the sender of the message.
+   * 
    * @return user
    */
   public String getUser() {
@@ -68,6 +76,7 @@ public class Message {
 
   /**
    * Returns the content of the message.
+   * 
    * @return message
    */
   public String getText() {
@@ -76,6 +85,7 @@ public class Message {
 
   /**
    * Returns the time of the message is sent.
+   * 
    * @return time stamp of the message
    */
   public long getTimestamp() {
@@ -84,9 +94,20 @@ public class Message {
 
   /**
    * Returns the recipient as a string.
+   * 
    * @return recipient
    */
   public String getRecipient() {
     return recipient;
+  }
+
+  /**
+   * Sets the parameter to the objects url
+   * 
+   * @return nothing
+   */
+  public void setImageUrl(String url) {
+    this.imageURL = url;
+
   }
 }
