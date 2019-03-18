@@ -48,13 +48,13 @@ public class Message {
    * @param timestamp Time of sending out the message
    * @param recipient Recipient of the message
    */
-  public Message(UUID id, String user, String text, long timestamp, String recipient, String imageURL) {
+  public Message(UUID id, String user, String text, long timestamp, String recipient, String imageUrl) {
     this.id = id;
     this.user = user;
     this.text = text;
     this.timestamp = timestamp;
     this.recipient = recipient;
-    this.imageUrl = imageURL;
+    this.imageUrl = imageUrl;
   }
 
   /**

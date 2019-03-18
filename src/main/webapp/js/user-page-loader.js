@@ -40,7 +40,6 @@ function showMessageFormIfViewingSelf() {
     .then((loginStatus) => {
       if (loginStatus.isLoggedIn &&
         loginStatus.username == parameterUsername) {
-        messageForm.action = '/messages?recipient=' + parameterUsername;
         fetchImageUploadUrlAndShowForm();
       }
     });
