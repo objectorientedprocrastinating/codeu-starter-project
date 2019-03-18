@@ -55,7 +55,7 @@ function fetchImageUploadUrlAndShowForm() {
     .then((imageUploadUrl) => {
       const messageForm = document.getElementById('message-form');
       messageForm.action = imageUploadUrl;
-      
+
     });
 }
 
@@ -98,7 +98,12 @@ function buildMessageDiv(message) {
   const messageDiv = document.createElement('div');
   messageDiv.classList.add('message-div');
   messageDiv.appendChild(headerDiv);
+  
   messageDiv.appendChild(bodyDiv);
+  if (message.imageUrl) {
+    bodyDiv.innerHTML += '<br/>';
+    bodyDiv.innerHTML += '<img src="' + message.imageUrl + '" />';
+  }
 
   return messageDiv;
 }

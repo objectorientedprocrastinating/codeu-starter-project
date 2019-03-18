@@ -32,9 +32,10 @@ public class Message {
    * recipient}. Generates a random ID and uses the current system time for the
    * creation time.
    */
-  public Message(String user, String text, String recipient) {
-    this(UUID.randomUUID(), user, text, System.currentTimeMillis(), recipient);
-    this.imageURL = null;
+  public Message(String user, String text, String recipient, String imageURL) {
+
+    this(UUID.randomUUID(), user, text, System.currentTimeMillis(), recipient, imageURL);
+
   }
 
   /**
@@ -47,13 +48,13 @@ public class Message {
    * @param timestamp Time of sending out the message
    * @param recipient Recipient of the message
    */
-  public Message(UUID id, String user, String text, long timestamp, String recipient) {
+  public Message(UUID id, String user, String text, long timestamp, String recipient, String imageURL) {
     this.id = id;
     this.user = user;
     this.text = text;
     this.timestamp = timestamp;
     this.recipient = recipient;
-    this.imageURL = null;
+    this.imageURL = imageURL;
   }
 
   /**
@@ -99,6 +100,15 @@ public class Message {
    */
   public String getRecipient() {
     return recipient;
+  }
+
+  /**
+   * Returns the recipient as a string.
+   * 
+   * @return recipient
+   */
+  public String getImageUrl() {
+    return imageURL;
   }
 
   /**
