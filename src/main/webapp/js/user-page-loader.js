@@ -40,13 +40,13 @@ function showMessageFormIfViewingSelf() {
     .then((loginStatus) => {
       if (loginStatus.isLoggedIn &&
         loginStatus.username == parameterUsername) {
-        const messageForm = document.getElementById('message-form');
         messageForm.action = '/messages?recipient=' + parameterUsername;
-        messageForm.classList.remove('hidden');
+        fetchImageUploadUrlAndShowForm();
       }
     });
   document.getElementById('about-me-form').classList.remove('hidden');
 }
+
 function fetchImageUploadUrlAndShowForm() {
   fetch('/image-upload-url')
     .then((response) => {
@@ -55,9 +55,10 @@ function fetchImageUploadUrlAndShowForm() {
     .then((imageUploadUrl) => {
       const messageForm = document.getElementById('message-form');
       messageForm.action = imageUploadUrl;
-
+      messageForm.classList.remove('hidden');
     });
 }
+
 
 /** Fetches messages and add them to the page. */
 function fetchMessages() {
@@ -98,7 +99,7 @@ function buildMessageDiv(message) {
   const messageDiv = document.createElement('div');
   messageDiv.classList.add('message-div');
   messageDiv.appendChild(headerDiv);
-  
+
   messageDiv.appendChild(bodyDiv);
   if (message.imageUrl) {
     bodyDiv.innerHTML += '<br/>';
