@@ -1,4 +1,4 @@
-gi/*
+/*
  * Copyright 2019 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -23,7 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Redirects the user to the Google logout page, which then redirects to the homepage.
+ * Redirects the user to the Google logout page, which then redirects to the
+ * homepage.
  */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
