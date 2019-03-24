@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bus Stops in Barcelona</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhWNDhXcbviYWwpu1Ksf5u0fZnHpW5c3E"></script>
+  <script>  
+    function createBusStopsMap(){
+      fetch('/bus-stops').then(function(response) {
+        return response.json();
+      }).then((busStops) => {
+        const map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 41.3896, lng: 2.1624},
+          zoom:7
+        });
+
+        busStops.forEach((busStop) => {
+          new google.maps.Marker({
+            position: {lat: busStop.lat, lng: busStop.lng},
+            map: map
+          });  
+        });
+      });
+    }
+  </script>
+  <style>
+    #map{
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+</head>
+<body onload="createBusStopsMap();">
+ <h1>Bus Stops in Barcelona</h1>
+ <div id="map"></div>
+</body>
+</html>
