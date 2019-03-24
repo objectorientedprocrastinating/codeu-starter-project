@@ -10,13 +10,14 @@
       }).then((busStops) => {
         const map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 41.3896, lng: 2.1624},
-          zoom:7
+          zoom:12
         });
 
         busStops.forEach((busStop) => {
-          new google.maps.Marker({
+          var marker = new google.maps.Marker({
             position: {lat: busStop.lat, lng: busStop.lng},
-            map: map
+            map: map,
+            title: busStop.neighborhood
           });  
         });
       });
