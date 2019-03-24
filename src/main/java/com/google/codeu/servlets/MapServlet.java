@@ -5,9 +5,10 @@ import java.util.Scanner;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import javax.servlet.http.HttpServletResponse;
+
 
 /** Returns bus stop data as a JSON array, e.g. [{"lat": 38.4404675, "lng": -122.7144313}] */
 @WebServlet("/bus-stops")
@@ -43,7 +44,7 @@ public class MapServlet extends HttpServlet {
     response.getOutputStream().println(busStops.toString());
   }
 
-  /** A single bus stop */
+  /** A single bus stop. */
   private static class BusStop {
     String neighborhood;
     double lat;
