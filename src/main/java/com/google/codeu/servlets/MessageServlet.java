@@ -21,15 +21,15 @@ import com.google.codeu.data.Message;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.List;
+import java.net.URL;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
-import java.net.URL;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 /** Handles fetching and saving {@link Message} instances. */
 @WebServlet("/messages")
@@ -64,21 +64,6 @@ public class MessageServlet extends HttpServlet {
     String json = gson.toJson(messages);
 
     response.getWriter().println(json);
-  }
-
-  /* Returns true if url is valid */
-  public static boolean isValid(String url) {
-    /* Try creating a valid URL */
-    try {
-      new URL(url).toURI();
-      return true;
-    }
-
-    // If there was an Exception
-    // while creating URL object
-    catch (Exception e) {
-      return false;
-    }
   }
 
   private static final Pattern urlPattern = Pattern.compile(
