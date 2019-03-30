@@ -96,24 +96,16 @@ public class MessageServlet extends HttpServlet {
       return;
     }
     String user = userService.getCurrentUser().getEmail();
-    String userText = Jsoup.clean(request.getParameter("text"), Whitelist.none());
+    String userText = Jsoup.clean(request.getParameter("text"), Whitelist.basic());
     String recipient = request.getParameter("recipient");
-    String textWithImagesReplaced = userText;
-    String regex = "((https|http)?://\\S+\\.(png|jpg|gif))";
 
-    Matcher matcher = urlPattern.matcher(userText);
-    while (matcher.find()) {
-      int matchStart = matcher.start(1);
-      int matchEnd = matcher.end();
-      // now you have the offsets of a URL match
-    }
-    System.out.println(regex);
-    if (isValid(regex)) {
-      String replacement = "<img src=\"$1\" />";
-      textWithImagesReplaced = userText.replaceAll(regex, replacement);
-    }
+    String regex = "((https|http)?://\\S+\\.(png|jpg))";
+    String replacement = "<img src=\"$1\" />";
+    String textWithImagesReplaced = userText.replaceAll(regex, replacement);
+
     Message message = new Message(user, textWithImagesReplaced, recipient);
     datastore.storeMessage(message);
+
     response.sendRedirect("/user-page.html?user=" + recipient);
   }
 }
