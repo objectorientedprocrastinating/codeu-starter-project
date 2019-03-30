@@ -1,102 +1,101 @@
-,Neighborhood.Name,Longitude,Latitude
-0,el Guinardó,2.1716189999999997,41.413744
-1,Vallcarca i els Penitents,2.134902,41.420221999999995
-2,la Font d'en Fargues,2.162913,41.423187
-3,la Font d'en Fargues,2.163667,41.422899
-4,Sarrià,2.120212,41.397209000000004
-5,el Putxet i el Farró,2.138941,41.411079
-6,el Putxet i el Farró,2.140984,41.411505
-7,Sant Gervasi - la Bonanova,2.136365,41.411343
-8,Diagonal Mar i el Front Marítim del Poblenou,2.209794,41.408116
-9,la Bordeta,2.1329700000000003,41.368237
-10,"Sant Pere, Santa Caterina i la Ribera",2.180286,41.385247
-11,el Camp de l'Arpa del Clot,2.1855599999999997,41.411736
-12,la Teixonera,2.144268,41.421356
-13,Torre Baró,2.177296,41.457757
-14,Vallbona,2.185879,41.466136
-15,Vallbona,2.1805380000000003,41.465945
-16,Sarrià,2.112207,41.400887
-17,Sarrià,2.110323,41.402203
-18,el Guinardó,2.178023,41.416973999999996
-19,la Maternitat i Sant Ramon,2.11423,41.376834
-20,Vallbona,2.180181,41.467054
-21,la Trinitat Nova,2.186639,41.453635
-22,Torre Baró,2.181365,41.456531
-23,Torre Baró,2.182146,41.456345
-24,el Baix Guinardó,2.170389,41.413548999999996
-25,Sant Antoni,2.150152,41.375534
-26,la Trinitat Vella,2.189252,41.451946
-27,Porta,2.180542,41.436852
-28,Sant Gervasi - la Bonanova,2.135582,41.401809
-29,Provençals del Poblenou,2.198624,41.406964
-30,Montbau,2.145426,41.432095000000004
-31,Diagonal Mar i el Front Marítim del Poblenou,2.218048,41.409689
-32,Torre Baró,2.1817990000000003,41.459707
-33,Pedralbes,2.105861,41.388524
-34,Provençals del Poblenou,2.204064,41.411202
-35,el Parc i la Llacuna del Poblenou,2.189864,41.393709
-36,les Corts,2.142116,41.386193
-37,les Corts,2.13775,41.390315
-38,el Poblenou,2.2019490000000004,41.394125
-39,l'Antiga Esquerra de l'Eixample,2.15331,41.386259
-40,la Sagrada Família,2.179513,41.407359
-41,Horta,2.159207,41.429536999999996
-42,el Carmel,2.15262,41.422432
-43,el Carmel,2.155351,41.423953999999995
-44,el Guinardó,2.1761,41.418407
-45,el Guinardó,2.171062,41.414273
-46,Pedralbes,2.1119630000000003,41.394049
-47,la Marina de Port,2.142764,41.355290999999994
-48,el Besòs i el Maresme,2.209979,41.413834
-49,Provençals del Poblenou,2.202464,41.408024
-50,el Besòs i el Maresme,2.215793,41.4179
-51,el Besòs i el Maresme,2.215793,41.4179
-52,la Marina del Prat Vermell,2.1406970000000003,41.321964
-53,la Dreta de l'Eixample,2.171723,41.389866
-54,la Verneda i la Pau,2.209706,41.422478999999996
-55,"Sant Pere, Santa Caterina i la Ribera",2.183843,41.383499
-56,Sant Andreu,2.193352,41.442433
-57,Horta,2.1535290000000002,41.435109000000004
-58,la Marina del Prat Vermell,2.141578,41.353451
-59,el Baix Guinardó,2.166014,41.410971999999994
-60,Pedralbes,2.108961,41.393209999999996
-61,la Dreta de l'Eixample,2.170821,41.387361999999996
-62,Pedralbes,2.117741,41.386012
-63,el Poble-sec,2.151898,41.374869
-64,el Barri Gòtic,2.1782630000000003,41.375823
-65,el Carmel,2.1554990000000003,41.421603999999995
-66,les Corts,2.130148,41.39033
-67,la Marina del Prat Vermell,2.1713169999999997,41.362381
-68,la Marina del Prat Vermell,2.140981,41.333259999999996
-69,la Marina del Prat Vermell,2.148483,41.345573
-70,Provençals del Poblenou,2.203954,41.411347
-71,la Nova Esquerra de l'Eixample,2.144551,41.384248
-72,la Marina del Prat Vermell,2.172668,41.363941
-73,la Barceloneta,2.192252,41.379159
-74,Sant Gervasi - la Bonanova,2.135965,41.404529
-75,el Bon Pastor,2.196125,41.440382
-76,la Dreta de l'Eixample,2.171015,41.387409999999996
-77,la Marina del Prat Vermell,2.172916,41.364470000000004
-78,la Vila Olímpica del Poblenou,2.196366,41.388408
-79,el Barri Gòtic,2.178172,41.376319
-80,Vallcarca i els Penitents,2.146875,41.411935
-81,la Verneda i la Pau,2.205782,41.427310999999996
-82,el Clot,2.190413,41.406299
-83,Provençals del Poblenou,2.206096,41.413851
-84,Sants - Badal,2.128161,41.371299
-85,Sant Andreu,2.193603,41.446437
-86,Sant Gervasi - Galvany,2.154937,41.395474
-87,Sant Gervasi - Galvany,2.14183,41.396037
-88,la Sagrada Família,2.170621,41.407529
-89,la Font de la Guatlla,2.144973,41.371789
-90,la Barceloneta,2.184461,41.381196
-91,el Barri Gòtic,2.183494,41.377029
-92,l'Antiga Esquerra de l'Eixample,2.156899,41.388498999999996
-93,la Dreta de l'Eixample,2.163218,41.393364
-94,la Maternitat i Sant Ramon,2.126976,41.387476
-95,la Vila de Gràcia,2.153555,41.408871000000005
-96,Hostafrancs,2.147535,41.375134
-97,Pedralbes,2.111052,41.384729
-98,la Dreta de l'Eixample,2.169279,41.388939
-99,el Clot,2.193717,41.410104
-100,la Verneda i la Pau,2.207257,41.420035
+el Guinardó,41.413744,2.171619
+Vallcarca i els Penitents,41.420222,2.134902
+la Font d'en Fargues,41.423187,2.162913
+la Font d'en Fargues,41.422899,2.163667
+Sarrià,41.397209,2.120212
+el Putxet i el Farró,41.411079,2.138941
+el Putxet i el Farró,41.411505,2.140984
+Sant Gervasi - la Bonanova,41.411343,2.136365
+Diagonal Mar i el Front Marítim del Poblenou,41.408116,2.209794
+la Bordeta,41.368237,2.13297
+Sant Pere,41.385247,2.180286
+el Camp de l'Arpa del Clot,41.411736,2.18556
+la Teixonera,41.421356,2.144268
+Torre Baró,41.457757,2.177296
+Vallbona,41.466136,2.185879
+Vallbona,41.465945,2.180538
+Sarrià,41.400887,2.112207
+Sarrià,41.402203,2.110323
+el Guinardó,41.416974,2.178023
+la Maternitat i Sant Ramon,41.376834,2.11423
+Vallbona,41.467054,2.180181
+la Trinitat Nova,41.453635,2.186639
+Torre Baró,41.456531,2.181365
+Torre Baró,41.456345,2.182146
+el Baix Guinardó,41.413549,2.170389
+Sant Antoni,41.375534,2.150152
+la Trinitat Vella,41.451946,2.189252
+Porta,41.436852,2.180542
+Sant Gervasi - la Bonanova,41.401809,2.135582
+Provençals del Poblenou,41.406964,2.198624
+Montbau,41.432095,2.145426
+Diagonal Mar i el Front Marítim del Poblenou,41.409689,2.218048
+Torre Baró,41.459707,2.181799
+Pedralbes,41.388524,2.105861
+Provençals del Poblenou,41.411202,2.204064
+el Parc i la Llacuna del Poblenou,41.393709,2.189864
+les Corts,41.386193,2.142116
+les Corts,41.390315,2.13775
+el Poblenou,41.394125,2.201949
+l'Antiga Esquerra de l'Eixample,41.386259,2.15331
+la Sagrada Família,41.407359,2.179513
+Horta,41.429537,2.159207
+el Carmel,41.422432,2.15262
+el Carmel,41.423954,2.155351
+el Guinardó,41.418407,2.1761
+el Guinardó,41.414273,2.171062
+Pedralbes,41.394049,2.111963
+la Marina de Port,41.355291,2.142764
+el Besòs i el Maresme,41.413834,2.209979
+Provençals del Poblenou,41.408024,2.202464
+el Besòs i el Maresme,41.4179,2.215793
+el Besòs i el Maresme,41.4179,2.215793
+la Marina del Prat Vermell,41.321964,2.140697
+la Dreta de l'Eixample,41.389866,2.171723
+la Verneda i la Pau,41.422479,2.209706
+Santa Caterina i la Ribera,41.383499,2.183843
+Sant Andreu,41.442433,2.193352
+Horta,41.435109,2.153529
+la Marina del Prat Vermell,41.353451,2.141578
+el Baix Guinardó,41.410972,2.166014
+Pedralbes,41.39321,2.108961
+la Dreta de l'Eixample,41.387362,2.170821
+Pedralbes,41.386012,2.117741
+el Poble-sec,41.374869,2.151898
+el Barri Gòtic,41.375823,2.178263
+el Carmel,41.421604,2.155499
+les Corts,41.39033,2.130148
+la Marina del Prat Vermell,41.362381,2.171317
+la Marina del Prat Vermell,41.33326,2.140981
+la Marina del Prat Vermell,41.345573,2.148483
+Provençals del Poblenou,41.411347,2.203954
+la Nova Esquerra de l'Eixample,41.384248,2.144551
+la Marina del Prat Vermell,41.363941,2.172668
+la Barceloneta,41.379159,2.192252
+Sant Gervasi - la Bonanova,41.404529,2.135965
+el Bon Pastor,41.440382,2.196125
+la Dreta de l'Eixample,41.38741,2.171015
+la Marina del Prat Vermell,41.36447,2.172916
+la Vila Olímpica del Poblenou,41.388408,2.196366
+el Barri Gòtic,41.376319,2.178172
+Vallcarca i els Penitents,41.411935,2.146875
+la Verneda i la Pau,41.427311,2.205782
+el Clot,41.406299,2.190413
+Provençals del Poblenou,41.413851,2.206096
+Sants - Badal,41.371299,2.128161
+Sant Andreu,41.446437,2.193603
+Sant Gervasi - Galvany,41.395474,2.154937
+Sant Gervasi - Galvany,41.396037,2.14183
+la Sagrada Família,41.407529,2.170621
+la Font de la Guatlla,41.371789,2.144973
+la Barceloneta,41.381196,2.184461
+el Barri Gòtic,41.377029,2.183494
+l'Antiga Esquerra de l'Eixample,41.388499,2.156899
+la Dreta de l'Eixample,41.393364,2.163218
+la Maternitat i Sant Ramon,41.387476,2.126976
+la Vila de Gràcia,41.408871,2.153555
+Hostafrancs,41.375134,2.147535
+Pedralbes,41.384729,2.111052
+la Dreta de l'Eixample,41.388939,2.169279
+el Clot,41.410104,2.193717
+la Verneda i la Pau,41.420035,2.207257

@@ -40,9 +40,9 @@ function showMessageFormIfViewingSelf() {
     .then((loginStatus) => {
       if (loginStatus.isLoggedIn &&
         loginStatus.username == parameterUsername) {
-         const messageForm = document.getElementById('message-form');
-         messageForm.action = '/messages?recipient=' + parameterUsername;
-         messageForm.classList.remove('hidden');
+        const messageForm = document.getElementById('message-form');
+        messageForm.action = '/messages?recipient=' + parameterUsername;
+        messageForm.classList.remove('hidden');
       }
     });
   document.getElementById('about-me-form').classList.remove('hidden');
@@ -50,25 +50,29 @@ function showMessageFormIfViewingSelf() {
 
 /** Fetches messages and add them to the page. */
 function fetchMessages() {
-  const url = '/messages?user=' + parameterUsername;
-  fetch(url)
+  fetch('/login-status')
     .then((response) => {
       return response.json();
     })
-    .then((messages) => {
-      const messagesContainer = document.getElementById('message-container');
-      if (messages.length == 0) {
-        messagesContainer.innerHTML = '<p>This user has no posts yet.</p>';
-      } else {
-        messagesContainer.innerHTML = '';
+    .then((loginStatus) => {
+      if (loginStatus.isLoggedIn &&
+        loginStatus.username == parameterUsername) {
+        fetchImageUploadUrlAndShowForm();
       }
-      messages.forEach((message) => {
-        const messageDiv = buildMessageDiv(message);
-        messagesContainer.appendChild(messageDiv);
-      });
     });
 }
 
+function fetchImageUploadUrlAndShowForm() {
+  fetch('/image-upload-url')
+    .then((response) => {
+      return response.text();
+    })
+    .then((imageUploadUrl) => {
+      const messageForm = document.getElementById('message-form');
+      messageForm.action = imageUploadUrl;
+      messageForm.classList.remove('hidden');
+    });
+}
 /**
  * Builds an element that displays the message.
  * @param {Message} message
