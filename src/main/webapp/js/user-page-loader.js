@@ -41,9 +41,11 @@ function showMessageFormIfLoggedIn() {
       return response.json();
     })
     .then((loginStatus) => {
-      if (loginStatus.isLoggedIn) {
+      if (loginStatus.isLoggedIn &&
+        loginStatus.username == parameterUsername) {
         const messageForm = document.getElementById('message-form');
         messageForm.action = '/messages?recipient=' + parameterUsername;
+        fetchImageUploadUrlAndShowForm();
         messageForm.classList.remove('hidden');
       }
     });
