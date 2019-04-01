@@ -20,6 +20,12 @@
   height: 100px;
   width: 100%;
 }
+/* Set the size of the image for a message to fit within the contents of the box. */
+.message-body img {
+  display: block;
+  margin-top: 25px;
+  max-width: 75%;
+}
 
 /* Give each message a rounded border. */
 .message-div {
