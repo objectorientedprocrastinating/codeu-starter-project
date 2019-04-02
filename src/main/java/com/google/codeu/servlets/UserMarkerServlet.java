@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
-/** Handles fetching and saving {@link UserMarker} instances. */
+/**
+ * Handles fetching and saving {@link UserMarker} instances.
+ */
 @WebServlet("/user-markers")
 public class UserMarkerServlet extends HttpServlet {
 
@@ -41,8 +43,8 @@ public class UserMarkerServlet extends HttpServlet {
   /**
    * Stores a new {@link UserMarker}.
    *
-   * @param request
-   * @param response
+   * @param request from httpservlet
+   * @param response to httpservlet
    */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) {
