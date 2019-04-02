@@ -44,6 +44,7 @@ function showMessageFormIfLoggedIn() {
       if (loginStatus.isLoggedIn &&
         loginStatus.username == parameterUsername) {
         const messageForm = document.getElementById('message-form');
+        fetchImageUploadUrlAndShowForm()
         messageForm.action = '/messages?recipient=' + parameterUsername;
         fetchImageUploadUrlAndShowForm();
         messageForm.classList.remove('hidden');
@@ -51,10 +52,20 @@ function showMessageFormIfLoggedIn() {
     });
   document.getElementById('about-me-form').classList.remove('hidden');
 }
-
+function fetchImageUploadUrlAndShowForm() {
+  fetch('/image-upload-url')
+    .then((response) => {
+      return response.text();
+    })
+    .then((imageUploadUrl) => {
+      const messageForm = document.getElementById('message-form');
+      messageForm.action = imageUploadUrl;
+      messageForm.classList.remove('hidden');
+    });
+}
 /** Fetches messages and add them to the page. */
 function fetchMessages() {
-
+  console.log(parameterUsername)
   const url = '/messages?user=' + parameterUsername;
   fetch(url)
     .then((response) => {
@@ -71,21 +82,9 @@ function fetchMessages() {
         const messageDiv = buildMessageDiv(message);
         messagesContainer.appendChild(messageDiv);
       });
-
     });
 }
 
-function fetchImageUploadUrlAndShowForm() {
-  fetch('/image-upload-url')
-    .then((response) => {
-      return response.text();
-    })
-    .then((imageUploadUrl) => {
-      const messageForm = document.getElementById('message-form');
-      messageForm.action = imageUploadUrl;
-      messageForm.classList.remove('hidden');
-    });
-}
 /**
  * Builds an element that displays the message.
  * @param {Message} message

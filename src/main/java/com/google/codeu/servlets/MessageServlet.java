@@ -16,6 +16,7 @@ package com.google.codeu.servlets;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.repackaged.com.google.api.client.util.IOUtils;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Message;
 import com.google.gson.Gson;
@@ -24,6 +25,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +54,7 @@ public class MessageServlet extends HttpServlet {
 
     response.setContentType("application/json");
     String user = request.getParameter("user");
-
+    System.out.println(user);
     if (user == null || user.equals("")) {
       // Request is invalid, return empty array
       response.getWriter().println("[]");
@@ -61,6 +64,7 @@ public class MessageServlet extends HttpServlet {
     List<Message> messages = datastore.getMessages(user);
     Gson gson = new Gson();
     String json = gson.toJson(messages);
+    System.out.println(json);
 
     response.getWriter().println(json);
   }
@@ -73,15 +77,22 @@ public class MessageServlet extends HttpServlet {
   /** Stores a new {@link Message}. */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+    System.out.println("doPost!!!!!!!!!!!!!!!");
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {
       response.sendRedirect("/index.html");
       return;
     }
+    String requestData = request.getReader().lines().collect(Collectors.joining());
+    System.out.println(requestData);
+
     String user = userService.getCurrentUser().getEmail();
+    System.out.println(user);
+
+    System.out.println(request.getParameter("text"));
     String userText = Jsoup.clean(request.getParameter("text"), Whitelist.basic());
     String recipient = request.getParameter("recipient");
+    System.out.println(recipient);
     String regex = "(https?://\\S+\\.(png|jpg))";
     String replacement = "<img src=\"$1\" />";
     String textWithImagesReplaced = userText.replaceAll(regex, replacement);
