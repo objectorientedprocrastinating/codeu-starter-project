@@ -11,7 +11,7 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
-limitations under the License.
+limitations under the License. Testing the CloudBuild
 -->
 
 <!DOCTYPE html>
@@ -21,8 +21,9 @@ limitations under the License.
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/user-page.css">
+    <link rel="stylesheet" href="/css/message-board.css">
     <script src="/js/user-page-loader.js"></script>
-    <Style>
+    <style>
       body{
         background-image: url("bg.jpg"); 
       }
@@ -47,7 +48,8 @@ limitations under the License.
         color: white;
       }
 
-    </Style>
+    </style>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
   </head>
   <body onload="buildUI();">
     <nav>
@@ -70,6 +72,7 @@ limitations under the License.
       Enter a new message:
       <br/>
       <textarea name="text" id="message-input"></textarea>
+      <script>ClassicEditor.create( document.getElementById('message-input') );</script>
       <br/>
       Add an image to your message:
       <input type="file" name="image" >
