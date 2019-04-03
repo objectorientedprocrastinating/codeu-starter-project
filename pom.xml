@@ -70,6 +70,18 @@ limitations under the License.
         <artifactId>appengine-maven-plugin</artifactId>
         <version>1.9.59</version>
       </plugin>
+		  <plugin>
+				<groupId>com.cosium.code</groupId>
+				<artifactId>maven-git-code-format</artifactId>
+				<version>${maven-git-code-format.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>install-hooks</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
     </plugins>
   </build>
 </project>
