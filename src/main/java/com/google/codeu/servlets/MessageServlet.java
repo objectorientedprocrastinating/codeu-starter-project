@@ -24,6 +24,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +50,8 @@ public class MessageServlet extends HttpServlet {
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+    System.out.println("in Message get");
+    System.out.println(request.getReader().lines().collect(Collectors.joining()));
     response.setContentType("application/json");
 
     String user = request.getParameter("user");
@@ -74,15 +77,19 @@ public class MessageServlet extends HttpServlet {
   /** Stores a new {@link Message}. */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+    System.out.println("in do post");
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {
       response.sendRedirect("/index.html");
       return;
     }
+    System.out.println(request.getReader().lines().collect(Collectors.joining()));
     String user = userService.getCurrentUser().getEmail();
+    System.out.println(user);
     String userText = Jsoup.clean(request.getParameter("text"), Whitelist.basic());
+    System.out.println(userText);
     String recipient = request.getParameter("recipient");
+    System.out.println(recipient);
     String regex = "(https?://\\S+\\.(png|jpg))";
     String replacement = "<img src=\"$1\" />";
     String textWithImagesReplaced = userText.replaceAll(regex, replacement);
@@ -90,6 +97,6 @@ public class MessageServlet extends HttpServlet {
     Message message = new Message(user, textWithImagesReplaced, recipient);
     datastore.storeMessage(message);
 
-    response.sendRedirect("/user-page.html?user=" + recipient);
+    response.sendRedirect("/user-page.html?user=" + user);
   }
 }
