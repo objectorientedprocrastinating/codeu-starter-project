@@ -1,0 +1,8 @@
+steps:
+- id: 'Stage app engine using mvn cloud image'
+  name: 'gcr.io/cloud-builders/mvn'
+  args: ['package', 'appengine:stage']
+- id: 'gcr.io/cloud-builders/gcloud'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy', 'target/appengine-staging/app.yaml']
+timeout: "1600s"
