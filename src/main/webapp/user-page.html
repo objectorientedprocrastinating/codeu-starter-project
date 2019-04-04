@@ -23,6 +23,32 @@ limitations under the License. Testing the CloudBuild
     <link rel="stylesheet" href="/css/user-page.css">
     <link rel="stylesheet" href="/css/message-board.css">
     <script src="/js/user-page-loader.js"></script>
+    <style>
+      body{
+        background-image: url("bg.jpg"); 
+      }
+      li {
+        float: left;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      div{
+        color:white;
+      }
+      #page-title{
+        color: white;
+      }
+      #message-form{
+        color: white;
+      }
+
+    </style>
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
   </head>
   <body onload="buildUI();">
@@ -31,6 +57,8 @@ limitations under the License. Testing the CloudBuild
         <li><a href="/">Home</a></li>
       </ul>
     </nav>
+    <hr style="width: 1440px">
+  
     <h1 id="page-title">User Page</h1>
     <div id="about-me-container">Loading...</div>
     <div id="about-me-form" class="hidden">
@@ -40,8 +68,7 @@ limitations under the License. Testing the CloudBuild
         <input type="submit" value="Submit">
       </form>
     </div>
-
-    <form id="message-form" action="/messages" method="POST" class="hidden" enctype="multipart/form-data">
+    <form id="message-form" action="/messages" method="POST" class="hidden">
       Enter a new message:
       <br/>
       <textarea name="text" id="message-input"></textarea>

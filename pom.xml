@@ -73,6 +73,18 @@ limitations under the License.
 		<project>sp19-codeu-17-9747</project>
 	</configuration>
       </plugin>
+		  <plugin>
+				<groupId>com.cosium.code</groupId>
+				<artifactId>maven-git-code-format</artifactId>
+				<version>${maven-git-code-format.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>install-hooks</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
     </plugins>
   </build>
 </project>
