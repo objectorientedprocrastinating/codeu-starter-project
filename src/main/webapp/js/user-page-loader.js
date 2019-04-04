@@ -50,15 +50,24 @@ function showMessageFormIfViewingSelf() {
 
 /** Fetches messages and add them to the page. */
 function fetchMessages() {
-  fetch('/login-status')
+
+  const url = '/messages?user=' + parameterUsername;
+  fetch(url)
     .then((response) => {
       return response.json();
     })
-    .then((loginStatus) => {
-      if (loginStatus.isLoggedIn &&
-        loginStatus.username == parameterUsername) {
-        fetchImageUploadUrlAndShowForm();
+    .then((messages) => {
+      const messagesContainer = document.getElementById('message-container');
+      if (messages.length == 0) {
+        messagesContainer.innerHTML = '<p>This user has no posts yet.</p>';
+      } else {
+        messagesContainer.innerHTML = '';
       }
+      messages.forEach((message) => {
+        const messageDiv = buildMessageDiv(message);
+        messagesContainer.appendChild(messageDiv);
+      });
+
     });
 }
 
@@ -116,3 +125,4 @@ function buildUI() {
   fetchMessages();
   fetchAboutMe();
 }
+
