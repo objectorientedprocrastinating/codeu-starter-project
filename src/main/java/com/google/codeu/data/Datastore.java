@@ -50,50 +50,15 @@ public class Datastore {
    * Gets messages posted by a specific user.
    *
    * @return a list of messages posted by the user, or empty list if user has never posted a
-   *     message. List is sorted by time descending.
-   *     Messages are public and will display on the recipient's user page
+   *     message. List is sorted by time descending. Messages are public and will display on the
+   *     recipient's user page
    */
   public List<Message> getMessages(String recipient) {
     List<Message> messages = new ArrayList<>();
-
-    Query query = new Query("Message")
+    Query query =
+        new Query("Message")
         .setFilter(new Query.FilterPredicate("recipient", FilterOperator.EQUAL, recipient))
-        .addSort("timestamp", SortDirection.DESCENDING);
-    PreparedQuery results = datastore.prepare(query);
-
-    for (Entity entity : results.asIterable()) {
-      try {
-        String idString = entity.getKey().getName();
-        UUID id = UUID.fromString(idString);
-        String user = (String) entity.getProperty("user");
-
-        String text = (String) entity.getProperty("text");
-        long timestamp = (long) entity.getProperty("timestamp");
-
-        Message message = new Message(id, user, text, timestamp, recipient);
-        messages.add(message);
-      } catch (Exception e) {
-        System.err.println("Error reading message.");
-        System.err.println(entity.toString());
-        e.printStackTrace();
-      }
-    }
-
-    return messages;
-  }
-
-  /**
-   * Gets messages posted by a specific user.
-   *
-   * @return a list of messages posted by the user, or empty list if user has never posted a
-   *         message. List is sorted by time descending.
-   */
-  public List<Message> getMessages(String recipient) {
-    List<Message> messages = new ArrayList<>();
-
-    Query query = new Query("Message")
-            .setFilter(new Query.FilterPredicate("recipient", FilterOperator.EQUAL, recipient))
-            .addSort("timestamp", SortDirection.DESCENDING);
+          .addSort("timestamp", SortDirection.DESCENDING);
 
     PreparedQuery results = datastore.prepare(query);
 
@@ -124,7 +89,7 @@ public class Datastore {
    * Gets messages posted by a specific user.
    *
    * @return a list of messages posted by the user, or empty list if user has never posted a
-   *         message. List is sorted by time descending.
+   *     message. List is sorted by time descending.
    */
   public List<Message> getAllMessages() {
     List<Message> messages = new ArrayList<>();
@@ -161,13 +126,12 @@ public class Datastore {
     datastore.put(userEntity);
   }
 
-  /**
-   * Returns the User owned by the email address, or null if no matching User was found.
-   */
+  /** Returns the User owned by the email address, or null if no matching User was found. */
   public User getUser(String email) {
 
-    Query query = new Query("User")
-        .setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, email));
+    Query query =
+        new Query("User")
+            .setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, email));
     PreparedQuery results = datastore.prepare(query);
     Entity userEntity = results.asSingleEntity();
     if (userEntity == null) {
@@ -178,5 +142,42 @@ public class Datastore {
     User user = new User(email, aboutMe);
 
     return user;
+  }
+
+  /**
+   * Get all the markers from the user.
+   *
+   * @return a list of markers
+   */
+  public List<UserMarker> getMarkers() {
+    List<UserMarker> markers = new ArrayList<>();
+
+    Query query = new Query("UserMarker");
+    PreparedQuery results = datastore.prepare(query);
+
+    for (Entity entity : results.asIterable()) {
+      try {
+        double lat = (double) entity.getProperty("lat");
+        double lng = (double) entity.getProperty("lng");
+        String content = (String) entity.getProperty("content");
+
+        UserMarker marker = new UserMarker(lat, lng, content);
+        markers.add(marker);
+      } catch (Exception e) {
+        System.err.println("Error reading marker.");
+        System.err.println(entity.toString());
+        e.printStackTrace();
+      }
+    }
+    return markers;
+  }
+
+  /** Store the markers in the datastore. */
+  public void storeMarker(UserMarker marker) {
+    Entity markerEntity = new Entity("UserMarker");
+    markerEntity.setProperty("lat", marker.getLat());
+    markerEntity.setProperty("lng", marker.getLng());
+    markerEntity.setProperty("content", marker.getContent());
+    datastore.put(markerEntity);
   }
 }
