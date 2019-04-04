@@ -99,7 +99,7 @@ public class Message {
     return recipient;
   }
 
-  /** Sets current imageUrl */
+  /** Sets current imageUrl. */
   public void setImageUrl(String imageUrl) {
     System.out.println("imageurl");
     System.out.println(imageUrl);
@@ -107,7 +107,7 @@ public class Message {
   }
 
   /**
-   * Returns the imageUrl
+   * Returns the imageUrl.
    *
    * @return imageUrl
    */
