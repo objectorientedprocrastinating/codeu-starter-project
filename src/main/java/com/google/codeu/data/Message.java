@@ -27,10 +27,8 @@ public class Message {
   private String imageUrl;
 
   /**
-   * Constructs a new {@link Message} posted by {@code user} with {@code text}
-   * content to {@code
-   * recipient}. Generates a random ID and uses the current system time for the
-   * creation time.
+   * Constructs a new {@link Message} posted by {@code user} with {@code text} content to {@code
+   * recipient}. Generates a random ID and uses the current system time for the creation time.
    */
   public Message(String user, String text, String recipient, String imageUrl) {
     this(UUID.randomUUID(), user, text, System.currentTimeMillis(), recipient, imageUrl);
@@ -39,15 +37,15 @@ public class Message {
   /**
    * Constructs a new message.
    *
-   * @param id        A non-null uuid to uniquely identify the constructed
-   *                  message.
-   * @param user      Sender of the message
-   * @param text      Content of the message
+   * @param id A non-null uuid to uniquely identify the constructed message.
+   * @param user Sender of the message
+   * @param text Content of the message
    * @param timestamp Time of sending out the message
    * @param recipient Recipient of the message
-   * @param imageUrl  Url of any image in the message
+   * @param imageUrl Url of any image in the message
    */
-  public Message(UUID id, String user, String text, long timestamp, String recipient, String imageUrl) {
+  public Message(
+      UUID id, String user, String text, long timestamp, String recipient, String imageUrl) {
     this.id = id;
     this.user = user;
     this.text = text;
@@ -58,7 +56,7 @@ public class Message {
 
   /**
    * Returns current non-null UUID.
-   * 
+   *
    * @return non-null UUID
    */
   public UUID getId() {
@@ -67,7 +65,7 @@ public class Message {
 
   /**
    * Returns the sender of the message.
-   * 
+   *
    * @return user
    */
   public String getUser() {
@@ -76,7 +74,7 @@ public class Message {
 
   /**
    * Returns the content of the message.
-   * 
+   *
    * @return message
    */
   public String getText() {
@@ -85,7 +83,7 @@ public class Message {
 
   /**
    * Returns the time of the message is sent.
-   * 
+   *
    * @return time stamp of the message
    */
   public long getTimestamp() {
@@ -94,20 +92,25 @@ public class Message {
 
   /**
    * Returns the recipient as a string.
-   * 
+   *
    * @return recipient
    */
   public String getRecipient() {
     return recipient;
   }
 
+  /** Sets current imageUrl */
   public void setImageUrl(String imageUrl) {
     System.out.println("imageurl");
     System.out.println(imageUrl);
     this.imageUrl = imageUrl;
-
   }
 
+  /**
+   * Returns the imageUrl
+   *
+   * @return imageUrl
+   */
   public Object getImageUrl() {
     return imageUrl;
   }

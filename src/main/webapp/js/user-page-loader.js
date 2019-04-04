@@ -65,15 +65,12 @@ function fetchImageUploadUrlAndShowForm() {
 }
 /** Fetches messages and add them to the page. */
 function fetchMessages() {
-  console.log(parameterUsername)
   const url = '/messages?user=' + parameterUsername;
   fetch(url)
     .then((response) => {
       return response.json();
     })
     .then((messages) => {
-      console.log("got messages in fetch")
-      console.log(messages)
       const messagesContainer = document.getElementById('message-container');
       if (messages.length == 0) {
         messagesContainer.innerHTML = '<p>This user has no posts yet.</p>';
