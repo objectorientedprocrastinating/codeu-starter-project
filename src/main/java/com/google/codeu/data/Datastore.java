@@ -36,7 +36,12 @@ public class Datastore {
 
   /** Stores the Message in Datastore. */
   public void storeMessage(Message message) {
+    System.out.println("store message");
+    System.out.println(message);
     Entity messageEntity = new Entity("Message", message.getId().toString());
+    if (message.getImageUrl() != null) {
+      messageEntity.setProperty("imageUrl", message.getImageUrl());
+    }
     messageEntity.setProperty("user", message.getUser());
     messageEntity.setProperty("text", message.getText());
     messageEntity.setProperty("timestamp", message.getTimestamp());
@@ -44,6 +49,8 @@ public class Datastore {
     // passing the recipient from the client to the sever
     messageEntity.setProperty("recipient", message.getRecipient());
     datastore.put(messageEntity);
+    System.out.println(messageEntity);
+    // System.out.println(getAllMessages());
   }
 
   /** returns a List of the interest a user has entered. */
@@ -71,16 +78,16 @@ public class Datastore {
   /**
    * Gets messages posted by a specific user.
    *
-   * @return a list of messages posted by the user, or empty list if user has never posted a
-   *     message. List is sorted by time descending. Messages are public and will display on the
-   *     recipient's user page
+   * @return a list of messages posted by the user, or empty list if user has
+   *         never posted a message. List is sorted by time descending. Messages
+   *         are public and will display on the recipient's user page
    */
   public List<Message> getMessages(String recipient) {
     List<Message> messages = new ArrayList<>();
-    Query query =
-        new Query("Message")
-            .setFilter(new Query.FilterPredicate("recipient", FilterOperator.EQUAL, recipient))
-            .addSort("timestamp", SortDirection.DESCENDING);
+
+    Query query = new Query("Message")
+        .setFilter(new Query.FilterPredicate("recipient", FilterOperator.EQUAL, recipient))
+        .addSort("timestamp", SortDirection.DESCENDING);
 
     PreparedQuery results = datastore.prepare(query);
 
@@ -93,7 +100,10 @@ public class Datastore {
         String text = (String) entity.getProperty("text");
         long timestamp = (long) entity.getProperty("timestamp");
 
-        Message message = new Message(id, user, text, timestamp, recipient);
+        String imageUrl = (String) entity.getProperty("imageUrl");
+        Message message = new Message(id, user, text, timestamp, recipient, imageUrl);
+
+        // Message message = new Message(id, user, text, timestamp, recipient);
         messages.add(message);
       } catch (Exception e) {
         System.err.println("Error reading message.");
@@ -108,8 +118,8 @@ public class Datastore {
   /**
    * Gets messages posted by a specific user.
    *
-   * @return a list of messages posted by the user, or empty list if user has never posted a
-   *     message. List is sorted by time descending.
+   * @return a list of messages posted by the user, or empty list if user has
+   *         never posted a message. List is sorted by time descending.
    */
   public List<Message> getAllMessages() {
     List<Message> messages = new ArrayList<>();
@@ -126,7 +136,10 @@ public class Datastore {
         long timestamp = (long) entity.getProperty("timestamp");
 
         String recipient = (String) entity.getProperty("recipient");
-        Message message = new Message(id, user, text, timestamp, recipient);
+
+        String imageUrl = (String) entity.getProperty("imageUrl");
+        Message message = new Message(id, user, text, timestamp, recipient, imageUrl);
+
         messages.add(message);
       } catch (Exception e) {
         System.err.println("Error reading message.");
@@ -156,7 +169,6 @@ public class Datastore {
 
   /** Returns the User owned by the email address, or null if no matching User was found. */
   public User getUser(String email) {
-
     Query query =
         new Query("User")
             .setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, email));

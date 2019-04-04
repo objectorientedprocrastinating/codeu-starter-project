@@ -72,6 +72,8 @@ function fetchMessages() {
       return response.json();
     })
     .then((messages) => {
+      console.log("got messages in fetch")
+      console.log(messages)
       const messagesContainer = document.getElementById('message-container');
       if (messages.length == 0) {
         messagesContainer.innerHTML = '<p>This user has no posts yet.</p>';
@@ -104,6 +106,10 @@ function buildMessageDiv(message) {
   messageDiv.classList.add('message-div');
   messageDiv.appendChild(headerDiv);
   messageDiv.appendChild(bodyDiv);
+  if (message.imageUrl) {
+    bodyDiv.innerHTML += '<br/>';
+    bodyDiv.innerHTML += '<img src="' + message.imageUrl + '" />';
+  }
 
   return messageDiv;
 }
