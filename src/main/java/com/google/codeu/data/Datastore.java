@@ -41,7 +41,7 @@ public class Datastore {
     messageEntity.setProperty("text", message.getText());
     messageEntity.setProperty("timestamp", message.getTimestamp());
 
-    //passing the recipient from the client to the sever
+    // passing the recipient from the client to the sever
     messageEntity.setProperty("recipient", message.getRecipient());
     datastore.put(messageEntity);
   }
@@ -57,8 +57,8 @@ public class Datastore {
     List<Message> messages = new ArrayList<>();
     Query query =
         new Query("Message")
-        .setFilter(new Query.FilterPredicate("recipient", FilterOperator.EQUAL, recipient))
-          .addSort("timestamp", SortDirection.DESCENDING);
+            .setFilter(new Query.FilterPredicate("recipient", FilterOperator.EQUAL, recipient))
+            .addSort("timestamp", SortDirection.DESCENDING);
 
     PreparedQuery results = datastore.prepare(query);
 
@@ -67,9 +67,9 @@ public class Datastore {
         String idString = entity.getKey().getName();
         UUID id = UUID.fromString(idString);
         String user = (String) entity.getProperty("user");
-        //NOT SURE: Added recipient since message constructor requires recipient
-        String recipient = (String) entity.getProperty("recipient");
-       
+        // NOT SURE: Added recipient since message constructor requires recipient
+        // String recipient = (String) entity.getProperty("recipient");
+
         String text = (String) entity.getProperty("text");
         long timestamp = (long) entity.getProperty("timestamp");
 

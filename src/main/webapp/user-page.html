@@ -38,15 +38,11 @@ limitations under the License. Testing the CloudBuild
         padding: 14px 16px;
         text-decoration: none;
       }
-      div{
-        color:white;
-      }
+      
       #page-title{
         color: white;
       }
-      #message-form{
-        color: white;
-      }
+      
 
     </style>
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
@@ -55,6 +51,7 @@ limitations under the License. Testing the CloudBuild
     <nav>
       <ul id="navigation">
         <li><a href="/">Home</a></li>
+        <li><a href="user-interest.html">Interests</a></li>
       </ul>
     </nav>
     <hr style="width: 1440px">
@@ -68,17 +65,19 @@ limitations under the License. Testing the CloudBuild
         <input type="submit" value="Submit">
       </form>
     </div>
-    <form id="message-form" action="/messages" method="POST" class="hidden">
-      Enter a new message:
-      <br/>
-      <textarea name="text" id="message-input"></textarea>
-      <script>ClassicEditor.create( document.getElementById('message-input') );</script>
-      <br/>
-      Add an image to your message:
-      <input type="file" name="image" >
-      <br/>
-      <input type="submit" value="Submit">
-    </form>
+    <div class = "black-text">
+        <form id="message-form" action="/messages" method="POST" class="hidden">
+          Enter a new message:
+          <br/>
+          <textarea name="text" id="message-input"></textarea>
+          <script>ClassicEditor.create( document.getElementById('message-input') );</script>
+          <br/>
+          Add an image to your message:
+          <input type="file" name="image" >
+          <br/>
+          <input type="submit" value="Submit">
+        </form>
+    </div>
     <hr/>
     <div id="message-container">Loading...</div>
   </body>
