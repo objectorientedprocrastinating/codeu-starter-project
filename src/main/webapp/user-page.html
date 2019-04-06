@@ -51,7 +51,6 @@ limitations under the License. Testing the CloudBuild
     <nav>
       <ul id="navigation">
         <li><a href="/">Home</a></li>
-        <li><a href="user-interest.html">Interests</a></li>
       </ul>
     </nav>
     <hr style="width: 1440px">
@@ -65,6 +64,22 @@ limitations under the License. Testing the CloudBuild
         <input type="submit" value="Submit">
       </form>
     </div>
+    <div class = "interest-form">
+      <h1>What do you like to do</h1>
+      <form action="/interest" method="POST">
+        I like to:
+        <br>
+          <input type="text" name="my-interest">
+        <br>
+        <input type="submit" value="Submit">
+      </form> 
+
+      <div>
+        <h1>These are your interests:</h1>
+        <div id="interest-container">Loading...</div>
+      </div>
+    </div>
+    
     <div class = "black-text">
         <form id="message-form" action="/messages" method="POST" class="hidden">
           Enter a new message:

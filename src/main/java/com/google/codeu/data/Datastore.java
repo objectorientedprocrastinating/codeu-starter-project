@@ -49,7 +49,7 @@ public class Datastore {
   public List<Interest> getInterests(String person) {
     List<Interest> likes = new ArrayList<>();
     Query query =
-        new Query("Message")
+        new Query("Interest")
             .setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, person));
     PreparedQuery results = datastore.prepare(query);
     for (Entity entity : results.asIterable()) {
@@ -140,7 +140,7 @@ public class Datastore {
   }
 
   public void storeInterest(Interest newInterest) {
-    Entity userEntity = new Entity("User", newInterest.getEmail());
+    Entity userEntity = new Entity("Interest", newInterest.getEmail());
     userEntity.setProperty("email", newInterest.getEmail());
     userEntity.setProperty("interest", newInterest.getInfo());
     datastore.put(userEntity);

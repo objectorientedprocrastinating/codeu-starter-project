@@ -11,15 +11,7 @@
     
       // Fetch messages and add them to the page.\
 
-      function fetchInterests(){
-        fetch("/interest").then((response) => {
-          return response.text();
-         }).then((interest)=> {
-          interestContainer = document.getElementById('interest-container');
-          interestContainer.innerHTML = interest;
-          console.log(interest)
-         });
-      }
+      
       
       // Fetch data and populate the UI of the page.
       function buildLikes(){

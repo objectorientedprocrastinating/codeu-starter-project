@@ -29,15 +29,15 @@ public class InterestServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     response.setContentType("text/html");
-
     String user = request.getParameter("user");
-
-    /**
-     * if (user == null || user.equals("")) { // Request is invalid, return empty array
-     * response.getWriter().println("User is invalid"); return; }
-     */
+    if (user == null || user.equals("")) { // Request is invalid, return empty array
+      response.getWriter().println("User is invalid");
+      return;
+    }
     List<Interest> likes = datastore.getInterests(user);
-    response.getWriter().println(user);
+    for (Interest myInterest : likes) {
+      response.getWriter().println(myInterest.getInfo());
+    }
   }
 
   @Override
@@ -53,6 +53,6 @@ public class InterestServlet extends HttpServlet {
     Interest newInterest = new Interest(userEmail, interest);
     datastore.storeInterest(newInterest);
 
-    response.sendRedirect("/user-interest.html?user=" + userEmail);
+    response.sendRedirect("/user-page.html?user=" + userEmail);
   }
 }
