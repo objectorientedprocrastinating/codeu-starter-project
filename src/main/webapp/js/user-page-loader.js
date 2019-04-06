@@ -110,9 +110,8 @@ function fetchInterests(){
   fetch(url).then((response) => {
     return response.text();
    }).then((interest)=> {
-    interestContainer = document.getElementById('interest-container');
+    var interestContainer = document.getElementById('interest-container');
     interestContainer.innerHTML = interest;
-    console.log(interest)
    });
 }
 
