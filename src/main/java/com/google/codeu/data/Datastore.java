@@ -118,6 +118,13 @@ public class Datastore {
     return messages;
   }
 
+  public void storeInterest(Interest newInterest) {
+    Entity userEntity = new Entity("User", newInterest.getEmail());
+    userEntity.setProperty("email", newInterest.getEmail());
+    userEntity.setProperty("aboutMe", newInterest.getInfo());
+    datastore.put(userEntity);
+  }
+
   /** Stores the User in Datastore. */
   public void storeUser(User user) {
     Entity userEntity = new Entity("User", user.getEmail());
