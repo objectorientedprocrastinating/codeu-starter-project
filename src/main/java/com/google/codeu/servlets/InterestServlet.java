@@ -5,6 +5,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Interest;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,22 @@ public class InterestServlet extends HttpServlet {
   @Override
   public void init() {
     datastore = new Datastore();
+  }
+
+  /** Responds with the "about me" section for a particular user. */
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    response.setContentType("text/html");
+
+    String user = request.getParameter("user");
+
+    /**
+     * if (user == null || user.equals("")) { // Request is invalid, return empty array
+     * response.getWriter().println("User is invalid"); return; }
+     */
+    List<Interest> likes = datastore.getInterests(user);
+    response.getWriter().println(user);
   }
 
   @Override

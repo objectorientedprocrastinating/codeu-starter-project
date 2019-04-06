@@ -46,6 +46,27 @@ public class Datastore {
     datastore.put(messageEntity);
   }
 
+  public List<Interest> getInterests(String person) {
+    List<Interest> likes = new ArrayList<>();
+    Query query =
+        new Query("Message")
+            .setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, person));
+    PreparedQuery results = datastore.prepare(query);
+    for (Entity entity : results.asIterable()) {
+      try {
+        String user = (String) entity.getProperty("email");
+        String info = (String) entity.getProperty("interest");
+        Interest like = new Interest(user, info);
+        likes.add(like);
+      } catch (Exception e) {
+        System.err.println("Error reading interest.");
+        System.err.println(entity.toString());
+        e.printStackTrace();
+      }
+    }
+    return likes;
+  }
+
   /**
    * Gets messages posted by a specific user.
    *
@@ -121,7 +142,7 @@ public class Datastore {
   public void storeInterest(Interest newInterest) {
     Entity userEntity = new Entity("User", newInterest.getEmail());
     userEntity.setProperty("email", newInterest.getEmail());
-    userEntity.setProperty("aboutMe", newInterest.getInfo());
+    userEntity.setProperty("interest", newInterest.getInfo());
     datastore.put(userEntity);
   }
 
