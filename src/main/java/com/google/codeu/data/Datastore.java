@@ -45,6 +45,7 @@ public class Datastore {
     messageEntity.setProperty("recipient", message.getRecipient());
     datastore.put(messageEntity);
   }
+
   /** returns a List of the interest a user has entered. */
   public List<Interest> getInterests(String person) {
     List<Interest> likes = new ArrayList<>();
@@ -138,6 +139,7 @@ public class Datastore {
 
     return messages;
   }
+
   /** Stores the user interest in the database. */
   public void storeInterest(Interest newInterest) {
     Entity userEntity = new Entity("Interest", newInterest.getEmail());
