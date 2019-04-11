@@ -5,6 +5,7 @@ public class UserMarker {
   private double lat;
   private double lng;
   private String content;
+  private String user;
 
   /**
    * Create a usermarker.
@@ -13,10 +14,11 @@ public class UserMarker {
    * @param lng longitude of the location.
    * @param content content to show in the info box.
    */
-  public UserMarker(double lat, double lng, String content) {
+  public UserMarker(double lat, double lng, String content, String user) {
     this.lat = lat;
     this.lng = lng;
     this.content = content;
+    this.user = user;
   }
 
   /**
@@ -44,5 +46,9 @@ public class UserMarker {
    */
   public String getContent() {
     return content;
+  }
+
+  public String getUser() {
+    return user;
   }
 }

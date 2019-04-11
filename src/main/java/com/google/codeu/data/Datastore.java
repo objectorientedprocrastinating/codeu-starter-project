@@ -41,7 +41,7 @@ public class Datastore {
     messageEntity.setProperty("text", message.getText());
     messageEntity.setProperty("timestamp", message.getTimestamp());
 
-    //passing the recipient from the client to the sever
+    // passing the recipient from the client to the sever
     messageEntity.setProperty("recipient", message.getRecipient());
     datastore.put(messageEntity);
   }
@@ -57,8 +57,8 @@ public class Datastore {
     List<Message> messages = new ArrayList<>();
     Query query =
         new Query("Message")
-        .setFilter(new Query.FilterPredicate("recipient", FilterOperator.EQUAL, recipient))
-          .addSort("timestamp", SortDirection.DESCENDING);
+            .setFilter(new Query.FilterPredicate("recipient", FilterOperator.EQUAL, recipient))
+            .addSort("timestamp", SortDirection.DESCENDING);
 
     PreparedQuery results = datastore.prepare(query);
 
@@ -67,9 +67,7 @@ public class Datastore {
         String idString = entity.getKey().getName();
         UUID id = UUID.fromString(idString);
         String user = (String) entity.getProperty("user");
-        //NOT SURE: Added recipient since message constructor requires recipient
-        String recipient = (String) entity.getProperty("recipient");
-       
+
         String text = (String) entity.getProperty("text");
         long timestamp = (long) entity.getProperty("timestamp");
 
@@ -149,7 +147,7 @@ public class Datastore {
    *
    * @return a list of markers
    */
-  public List<UserMarker> getMarkers() {
+  public List<UserMarker> getMarkers(String user) {
     List<UserMarker> markers = new ArrayList<>();
 
     Query query = new Query("UserMarker");
@@ -161,7 +159,7 @@ public class Datastore {
         double lng = (double) entity.getProperty("lng");
         String content = (String) entity.getProperty("content");
 
-        UserMarker marker = new UserMarker(lat, lng, content);
+        UserMarker marker = new UserMarker(lat, lng, content, user);
         markers.add(marker);
       } catch (Exception e) {
         System.err.println("Error reading marker.");
@@ -178,6 +176,7 @@ public class Datastore {
     markerEntity.setProperty("lat", marker.getLat());
     markerEntity.setProperty("lng", marker.getLng());
     markerEntity.setProperty("content", marker.getContent());
+    markerEntity.setProperty("user", marker.getUser());
     datastore.put(markerEntity);
   }
 }

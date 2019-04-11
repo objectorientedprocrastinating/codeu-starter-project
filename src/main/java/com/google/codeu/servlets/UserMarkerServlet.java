@@ -1,5 +1,7 @@
 package com.google.codeu.servlets;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.UserMarker;
 import com.google.gson.Gson;
@@ -12,9 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
-/**
- * Handles fetching and saving {@link UserMarker} instances.
- */
+/** Handles fetching and saving {@link UserMarker} instances. */
 @WebServlet("/user-markers")
 public class UserMarkerServlet extends HttpServlet {
 
@@ -32,8 +32,8 @@ public class UserMarkerServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json");
-
-    List<UserMarker> markers = datastore.getMarkers();
+    String user = request.getParameter("user");
+    List<UserMarker> markers = datastore.getMarkers(user);
     Gson gson = new Gson();
     String json = gson.toJson(markers);
 
@@ -47,13 +47,20 @@ public class UserMarkerServlet extends HttpServlet {
    * @param response to httpservlet
    */
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) {
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    UserService userService = UserServiceFactory.getUserService();
+    if (!userService.isUserLoggedIn()) {
+      response.sendRedirect("/index.html");
+      return;
+    }
 
     double lat = Double.parseDouble(request.getParameter("lat"));
     double lng = Double.parseDouble(request.getParameter("lng"));
     String content = Jsoup.clean(request.getParameter("content"), Whitelist.basic());
+    String user = userService.getCurrentUser().getEmail();
 
-    UserMarker marker = new UserMarker(lat, lng, content);
+    UserMarker marker = new UserMarker(lat, lng, content, user);
     datastore.storeMarker(marker);
   }
 }
