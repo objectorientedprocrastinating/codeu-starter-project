@@ -41,9 +41,31 @@ public class Datastore {
     messageEntity.setProperty("text", message.getText());
     messageEntity.setProperty("timestamp", message.getTimestamp());
 
-    //passing the recipient from the client to the sever
+    // passing the recipient from the client to the sever
     messageEntity.setProperty("recipient", message.getRecipient());
     datastore.put(messageEntity);
+  }
+
+  /** returns a List of the interest a user has entered. */
+  public List<Interest> getInterests(String person) {
+    List<Interest> likes = new ArrayList<>();
+    Query query =
+        new Query("Interest")
+            .setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, person));
+    PreparedQuery results = datastore.prepare(query);
+    for (Entity entity : results.asIterable()) {
+      try {
+        String user = (String) entity.getProperty("email");
+        String info = (String) entity.getProperty("interest");
+        Interest like = new Interest(user, info);
+        likes.add(like);
+      } catch (Exception e) {
+        System.err.println("Error reading interest.");
+        System.err.println(entity.toString());
+        e.printStackTrace();
+      }
+    }
+    return likes;
   }
 
   /**
@@ -57,8 +79,8 @@ public class Datastore {
     List<Message> messages = new ArrayList<>();
     Query query =
         new Query("Message")
-        .setFilter(new Query.FilterPredicate("recipient", FilterOperator.EQUAL, recipient))
-          .addSort("timestamp", SortDirection.DESCENDING);
+            .setFilter(new Query.FilterPredicate("recipient", FilterOperator.EQUAL, recipient))
+            .addSort("timestamp", SortDirection.DESCENDING);
 
     PreparedQuery results = datastore.prepare(query);
 
@@ -67,9 +89,9 @@ public class Datastore {
         String idString = entity.getKey().getName();
         UUID id = UUID.fromString(idString);
         String user = (String) entity.getProperty("user");
-        //NOT SURE: Added recipient since message constructor requires recipient
-        String recipient = (String) entity.getProperty("recipient");
-       
+        // NOT SURE: Added recipient since message constructor requires recipient
+        // String recipient = (String) entity.getProperty("recipient");
+
         String text = (String) entity.getProperty("text");
         long timestamp = (long) entity.getProperty("timestamp");
 
@@ -116,6 +138,14 @@ public class Datastore {
     }
 
     return messages;
+  }
+
+  /** Stores the user interest in the database. */
+  public void storeInterest(Interest newInterest) {
+    Entity userEntity = new Entity("Interest", newInterest.getEmail());
+    userEntity.setProperty("email", newInterest.getEmail());
+    userEntity.setProperty("interest", newInterest.getInfo());
+    datastore.put(userEntity);
   }
 
   /** Stores the User in Datastore. */
