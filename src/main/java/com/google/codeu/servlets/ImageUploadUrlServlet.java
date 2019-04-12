@@ -8,15 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Provides access to a URL that allows a user to upload an image to Blobstore.
- */
+/** Provides access to a URL that allows a user to upload an image to Blobstore. */
 @WebServlet("/image-upload-url")
 public class ImageUploadUrlServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    System.out.println("in get upload");
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     String uploadUrl = blobstoreService.createUploadUrl("/messages");
 

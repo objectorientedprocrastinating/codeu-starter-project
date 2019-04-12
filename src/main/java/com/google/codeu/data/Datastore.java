@@ -36,8 +36,6 @@ public class Datastore {
 
   /** Stores the Message in Datastore. */
   public void storeMessage(Message message) {
-    System.out.println("store message");
-    System.out.println(message);
     Entity messageEntity = new Entity("Message", message.getId().toString());
     if (message.getImageUrl() != null) {
       messageEntity.setProperty("imageUrl", message.getImageUrl());
@@ -49,8 +47,6 @@ public class Datastore {
     // passing the recipient from the client to the sever
     messageEntity.setProperty("recipient", message.getRecipient());
     datastore.put(messageEntity);
-    System.out.println(messageEntity);
-    // System.out.println(getAllMessages());
   }
 
   /** returns a List of the interest a user has entered. */

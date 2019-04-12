@@ -61,7 +61,7 @@ public class MessageServlet extends HttpServlet {
 
     response.setContentType("application/json");
     String user = request.getParameter("user");
-    System.out.println(user);
+
     if (user == null || user.equals("")) {
       // Request is invalid, return empty array
       response.getWriter().println("[]");
@@ -71,7 +71,6 @@ public class MessageServlet extends HttpServlet {
     List<Message> messages = datastore.getMessages(user);
     Gson gson = new Gson();
     String json = gson.toJson(messages);
-    System.out.println(json);
 
     response.getWriter().println(json);
   }
@@ -84,38 +83,30 @@ public class MessageServlet extends HttpServlet {
   /** Stores a new {@link Message}. */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    System.out.println("doPost!!!!!!!!!!!!!!!");
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {
       response.sendRedirect("/index.html");
       return;
     }
-    String requestData = request.getReader().lines().collect(Collectors.joining());
-    System.out.println(requestData);
-
+    // in case you want to print request
+    // String requestData =
+    // request.getReader().lines().collect(Collectors.joining());
     String user = userService.getCurrentUser().getEmail();
-    System.out.println(user);
-
-    System.out.println(request.getParameter("text"));
     String userText = Jsoup.clean(request.getParameter("text"), Whitelist.basic());
     String recipient = request.getParameter("recipient");
     System.out.println(recipient);
     String regex = "(https?://\\S+\\.(png|jpg))";
     String replacement = "<img src=\"$1\" />";
     String textWithImagesReplaced = userText.replaceAll(regex, replacement);
-
     Message message = new Message(user, textWithImagesReplaced, recipient, "");
-
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
     List<BlobKey> blobKeys = blobs.get("image");
-    System.out.println("blobkeys" + blobKeys);
     if (blobKeys != null && !blobKeys.isEmpty()) {
       BlobKey blobKey = blobKeys.get(0);
       ImagesService imagesService = ImagesServiceFactory.getImagesService();
       ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
       String imageUrl = imagesService.getServingUrl(options);
-      System.out.println(imageUrl);
       message.setImageUrl(imageUrl);
     }
     datastore.storeMessage(message);

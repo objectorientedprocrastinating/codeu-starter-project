@@ -101,8 +101,6 @@ public class Message {
 
   /** Sets current imageUrl. */
   public void setImageUrl(String imageUrl) {
-    System.out.println("imageurl");
-    System.out.println(imageUrl);
     this.imageUrl = imageUrl;
   }
 
