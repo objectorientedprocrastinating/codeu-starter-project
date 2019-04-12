@@ -104,6 +104,18 @@ function buildMessageDiv(message) {
 
   return messageDiv;
 }
+
+function fetchInterests(){
+  const url = '/interest?user=' + parameterUsername;
+  fetch(url).then((response) => {
+    return response.text();
+   }).then((interest)=> {
+    var interestContainer = document.getElementById('interest-container');
+    interestContainer.innerHTML = interest;
+   });
+}
+
+
 function fetchAboutMe() {
   const url = '/about?user=' + parameterUsername;
   fetch(url).then((response) => {
@@ -124,5 +136,6 @@ function buildUI() {
   showMessageFormIfViewingSelf();
   fetchMessages();
   fetchAboutMe();
+  fetchInterests();
 }
 
