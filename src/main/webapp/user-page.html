@@ -8,7 +8,7 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
-limitations under the License.
+limitations under the License. Testing the CloudBuild
 -->
 
 <!DOCTYPE html>
@@ -18,7 +18,31 @@ limitations under the License.
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/user-page.css">
+    <link rel="stylesheet" href="/css/message-board.css">
     <script src="/js/user-page-loader.js"></script>
+    <style>
+      body{
+        background-image: url("bg.jpg"); 
+      }
+      li {
+        float: left;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      
+      #page-title{
+        color: white;
+      }
+      
+
+    </style>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
   </head>
   <body onload="buildUI();">
     <nav>
@@ -26,6 +50,8 @@ limitations under the License.
         <li><a href="/">Home</a></li>
       </ul>
     </nav>
+    <hr style="width: 1440px">
+  
     <h1 id="page-title">User Page</h1>
     <div id="about-me-container">Loading...</div>
     <div id="about-me-form" class="hidden">
@@ -35,16 +61,35 @@ limitations under the License.
         <input type="submit" value="Submit">
       </form>
     </div>
-    <form id="message-form" class="hidden" method="POST" enctype="multipart/form-data">
-  Enter a new message:
-  <br/>
-  <textarea name="text" id="message-input"></textarea>
-  <br/>
-  Add an image to your message:
-  <input type="file" name="image">
-  <br/>
-  <input type="submit" value="Submit">
-</form>
+    <div class = "interest-form">
+      <h1>What do you like to do</h1>
+      <form action="/interest" method="POST">
+        I like to:
+        <br>
+          <input type="text" name="my-interest">
+        <br>
+        <input type="submit" value="Submit">
+      </form> 
+
+      <div>
+        <h1>These are your interests:</h1>
+        <div id="interest-container">Loading...</div>
+      </div>
+    </div>
+    
+    <div class = "black-text">
+        <form id="message-form" action="/messages" method="POST" class="hidden">
+          Enter a new message:
+          <br/>
+          <textarea name="text" id="message-input"></textarea>
+          <script>ClassicEditor.create( document.getElementById('message-input') );</script>
+          <br/>
+          Add an image to your message:
+        
+          <br/>
+          <input type="submit" value="Submit">
+        </form>
+    </div>
     <hr/>
     <div id="message-container">Loading...</div>
   </body>

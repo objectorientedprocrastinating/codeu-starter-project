@@ -44,6 +44,7 @@
 .message-header {
   border-bottom: thin solid black;
   padding: 5px;
+  color:black
 }
 
 /* Give the message body a margin so the text
@@ -56,4 +57,8 @@
    user is not logged in or viewing their own page. */
 .hidden {
   display: none;
+}
+
+.black-text{
+  margin-bottom:100px;
 }
