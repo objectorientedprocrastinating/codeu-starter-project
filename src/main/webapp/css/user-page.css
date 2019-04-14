@@ -14,6 +14,16 @@
  * limitations under the License.
  */
 
+.black-text{
+  margin-bottom:100px;
+}
+
+/*Set the size for the map*/
+#map{
+  width: 500px;
+  height: 500px;
+}
+
 /* Set the size of the message input to be 100 pixels high
    and will fill the width of its parent element. */
 .message-body img {
@@ -51,15 +61,4 @@
    user is not logged in or viewing their own page. */
 .hidden {
   display: none;
-}
-
-
-#map{
-  width: 500px;
-  height: 500px;
-}
-
-
-.black-text{
-  margin-bottom:100px;
 }
