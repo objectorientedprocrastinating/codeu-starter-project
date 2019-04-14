@@ -105,6 +105,18 @@ function buildMessageDiv(message) {
 
   return messageDiv;
 }
+
+function fetchInterests(){
+  const url = '/interest?user=' + parameterUsername;
+  fetch(url).then((response) => {
+    return response.text();
+   }).then((interest)=> {
+    var interestContainer = document.getElementById('interest-container');
+    interestContainer.innerHTML = interest;
+   });
+}
+
+
 function fetchAboutMe() {
   const url = '/about?user=' + parameterUsername;
   fetch(url).then((response) => {
@@ -128,7 +140,7 @@ function createMap(){
   map.addListener('click', (event) => {
     createMarkerForEdit(event.latLng.lat(), event.latLng.lng());
   });
-  
+
   fetchMarkers();
 }
 
@@ -139,7 +151,7 @@ function fetchMarkers(){
   }).then((markers) => {
     markers.forEach((marker) => {
      createMarkerForDisplay(marker.lat, marker.lng, marker.content)
-    });  
+    });
   });
 }
 
@@ -149,7 +161,7 @@ function createMarkerForDisplay(lat, lng, content){
     position: {lat: lat, lng: lng},
     map: map
   });
-          
+
   var infoWindow = new google.maps.InfoWindow({
     content: content
   });
@@ -177,20 +189,20 @@ function createMarkerForEdit(lat, lng){
   if(editMarker){
    editMarker.setMap(null);
   }
- 
+
   editMarker = new google.maps.Marker({
     position: {lat: lat, lng: lng},
     map: map
-  });  
-     
+  });
+
   const infoWindow = new google.maps.InfoWindow({
     content: buildInfoWindowInput(lat, lng)
   });
-  
+
   google.maps.event.addListener(infoWindow, 'closeclick', () => {
     editMarker.setMap(null);
   });
-  
+
   infoWindow.open(map, editMarker);
 }
 
@@ -198,18 +210,18 @@ function buildInfoWindowInput(lat, lng){
   const textBox = document.createElement('textarea');
   const button = document.createElement('button');
   button.appendChild(document.createTextNode('Submit'));
- 
+
   button.onclick = () => {
     postMarker(lat, lng, textBox.value, parameterUsername);
     createMarkerForDisplay(lat, lng, textBox.value);
     editMarker.setMap(null);
   };
- 
+
   const containerDiv = document.createElement('div');
   containerDiv.appendChild(textBox);
   containerDiv.appendChild(document.createElement('br'));
   containerDiv.appendChild(button);
- 
+
   return containerDiv;
 }
 
@@ -220,5 +232,6 @@ function buildUI() {
   fetchMessages();
   fetchAboutMe();
   createMap();
+  fetchInterests();
 }
 

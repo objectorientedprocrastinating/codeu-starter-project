@@ -57,3 +57,9 @@ body {
   .hidden {
     display: none;
   }
+
+  .interest-form{
+    float: right;
+    padding: 30px;
+    text-align: right;
+  }

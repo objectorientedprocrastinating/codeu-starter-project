@@ -41,17 +41,35 @@ limitations under the License. Testing the CloudBuild
         <input type="submit" value="Submit">
       </form>
     </div>
-    <form id="message-form" action="/messages" method="POST" class="hidden">
-      Enter a new message:
-      <br/>
-      <textarea name="text" id="message-input"></textarea>
-      <script>ClassicEditor.create( document.getElementById('message-input') );</script>
-      <br/>
-      Add an image to your message:
-      <input type="file" name="image" >
-      <br/>
-      <input type="submit" value="Submit">
-    </form>
+    <div class = "interest-form">
+      <h1>What do you like to do</h1>
+      <form action="/interest" method="POST">
+        I like to:
+        <br>
+          <input type="text" name="my-interest">
+        <br>
+        <input type="submit" value="Submit">
+      </form>
+
+      <div>
+        <h1>These are your interests:</h1>
+        <div id="interest-container">Loading...</div>
+      </div>
+    </div>
+
+    <div class = "black-text">
+        <form id="message-form" action="/messages" method="POST" class="hidden">
+          Enter a new message:
+          <br/>
+          <textarea name="text" id="message-input"></textarea>
+          <script>ClassicEditor.create( document.getElementById('message-input') );</script>
+          <br/>
+          Add an image to your message:
+          <input type="file" name="image" >
+          <br/>
+          <input type="submit" value="Submit">
+        </form>
+    </div>
     <hr/>
     <div id="message-container">Loading...</div>
     <div id="map"></div>

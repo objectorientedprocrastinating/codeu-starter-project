@@ -3,8 +3,9 @@ package com.google.codeu.servlets;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
-import com.google.codeu.data.User;
+import com.google.codeu.data.Interest;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
-/** Handles fetching and saving user data. */
-@WebServlet("/about")
-public class AboutMeServlet extends HttpServlet {
+/** Handles fetching and saving user intersts. */
+@WebServlet("/interest")
+public class InterestServlet extends HttpServlet {
 
   private Datastore datastore;
 
@@ -28,20 +29,15 @@ public class AboutMeServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     response.setContentType("text/html");
-
     String user = request.getParameter("user");
-    if (user == null || user.equals("")) {
-      // Request is invalid, return empty response
+    if (user == null || user.equals("")) { // Request is invalid, return empty array
+      response.getWriter().println("User is invalid");
       return;
     }
-
-    User userData = datastore.getUser(user);
-
-    if (userData == null || userData.getAboutMe() == null) {
-      return;
+    List<Interest> likes = datastore.getInterests(user);
+    for (Interest myInterest : likes) {
+      response.getWriter().println(myInterest.getInfo());
     }
-
-    response.getOutputStream().println(userData.getAboutMe());
   }
 
   @Override
@@ -52,12 +48,10 @@ public class AboutMeServlet extends HttpServlet {
       response.sendRedirect("/index.html");
       return;
     }
-
     String userEmail = userService.getCurrentUser().getEmail();
-    String aboutMe = Jsoup.clean(request.getParameter("about-me"), Whitelist.none());
-
-    User user = new User(userEmail, aboutMe);
-    datastore.storeUser(user);
+    String interest = Jsoup.clean(request.getParameter("my-interest"), Whitelist.none());
+    Interest newInterest = new Interest(userEmail, interest);
+    datastore.storeInterest(newInterest);
 
     response.sendRedirect("/user-page.html?user=" + userEmail);
   }

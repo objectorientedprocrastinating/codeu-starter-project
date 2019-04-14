@@ -38,6 +38,7 @@
 .message-header {
   border-bottom: thin solid black;
   padding: 5px;
+  color:black
 }
 
 /* Give the message body a margin so the text
@@ -56,4 +57,9 @@
 #map{
   width: 500px;
   height: 500px;
+}
+
+
+.black-text{
+  margin-bottom:100px;
 }
