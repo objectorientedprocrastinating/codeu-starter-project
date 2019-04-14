@@ -62,5 +62,7 @@ public class UserMarkerServlet extends HttpServlet {
 
     UserMarker marker = new UserMarker(lat, lng, content, user);
     datastore.storeMarker(marker);
+
+    response.sendRedirect("/user-page.html?user=" + user);
   }
 }

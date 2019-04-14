@@ -150,7 +150,9 @@ public class Datastore {
   public List<UserMarker> getMarkers(String user) {
     List<UserMarker> markers = new ArrayList<>();
 
-    Query query = new Query("UserMarker");
+    Query query =
+        new Query("UserMarker")
+            .setFilter(new Query.FilterPredicate("user", FilterOperator.EQUAL, user));
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
