@@ -18,10 +18,22 @@
   margin-bottom:100px;
 }
 
+/* Use this to hide certain elements like forms if the
+   user is not logged in or viewing their own page. */
+.hidden {
+  display: none;
+}
+
 /*Set the size for the map*/
 .map{
   width: 500px;
   height: 500px;
+}
+
+/* Give the message body a margin so the text
+   isn't too close to the border. */
+.message-body {
+  margin: 5px;
 }
 
 /* Set the size of the message input to be 100 pixels high
@@ -30,11 +42,6 @@
   display: block;
   margin-top: 25px;
   max-width: 75%;
-}
-
-#message-input {
-  height: 100px;
-  width: 100%;
 }
 
 /* Give each message a rounded border. */
@@ -51,14 +58,8 @@
   color:black
 }
 
-/* Give the message body a margin so the text
-   isn't too close to the border. */
-.message-body {
-  margin: 5px;
+#message-input {
+  height: 100px;
+  width: 100%;
 }
 
-/* Use this to hide certain elements like forms if the
-   user is not logged in or viewing their own page. */
-.hidden {
-  display: none;
-}
