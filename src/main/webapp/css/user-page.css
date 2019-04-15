@@ -54,7 +54,7 @@
 /* Add a bottom border to the message header. */
 .message-header {
   border-bottom: thin solid black;
-  color:black
+  color:black;
   padding: 5px;
 }
 
