@@ -58,7 +58,7 @@
   padding: 5px;
 }
 
-#message-input {
+.message-input {
   height: 100px;
   width: 100%;
 }
