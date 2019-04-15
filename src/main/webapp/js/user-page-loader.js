@@ -15,6 +15,7 @@
  */
 
 // Get ?user=XYZ parameter value
+/* global google */
 const urlParams = new URLSearchParams(window.location.search);
 const parameterUsername = urlParams.get('user');
 let editMarker;
