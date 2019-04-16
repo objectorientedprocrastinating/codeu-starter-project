@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
-/** Handles fetching and saving {@link UserMarker} instances. */
+/**
+ * Handles fetching and saving {@link UserMarker} instances. Each marker belongs to a {@link
+ * com.google.codeu.data.User}.
+ */
 @WebServlet("/user-markers")
 public class UserMarkerServlet extends HttpServlet {
 
