@@ -61,7 +61,7 @@ limitations under the License. Testing the CloudBuild
         <form id="message-form" action="/messages" method="POST" class="hidden">
           Enter a new message:
           <br/>
-          <textarea name="text" class="message-input"></textarea>
+          <textarea name="text" class="message-input" id="message-input"></textarea>
           <script>ClassicEditor.create( document.getElementById('message-input') );</script>
           <br/>
           Add an image to your message:
@@ -72,6 +72,6 @@ limitations under the License. Testing the CloudBuild
     </div>
     <hr/>
     <div id="message-container">Loading...</div>
-    <div class ="map"></div>
+    <div class ="map" id = "map"></div>
   </body>
 </html>
