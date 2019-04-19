@@ -48,8 +48,8 @@ public class MessageServlet extends HttpServlet {
   }
 
   /**
-   * Responds with a JSON representation of {@link Message} data for a specific
-   * user. Responds with an empty array if the user is not provided.
+   * Responds with a JSON representation of {@link Message} data for a specific user. Responds with
+   * an empty array if the user is not provided.
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -70,10 +70,12 @@ public class MessageServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
-  private static final Pattern urlPattern = Pattern.compile(
-      "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)" + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
-          + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)",
-      Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+  private static final Pattern urlPattern =
+      Pattern.compile(
+          "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)"
+              + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
+              + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)",
+          Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 
   /** Stores a new {@link Message}. */
   @Override
@@ -94,7 +96,9 @@ public class MessageServlet extends HttpServlet {
     List<BlobKey> blobKeys = blobs.get("image");
 
     String recipient = request.getParameter("recipient");
-    System.out.println(recipient);
+    if (recipient == null || recipient.isEmpty()) {
+      recipient = userService.getCurrentUser().getEmail();
+    }
     String regex = "(https?://\\S+\\.(png|jpg))";
     String replacement = "<img src=\"$1\" />";
     String textWithImagesReplaced = userText.replaceAll(regex, replacement);

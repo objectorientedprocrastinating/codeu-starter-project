@@ -43,7 +43,6 @@ function showMessageFormIfLoggedIn() {
       .then((loginStatus) => {
         if (loginStatus.isLoggedIn) {
           fetchImageUploadUrlAndShowForm();
-          message.action += "?recipient=" +parameterUsername;
           if (loginStatus.username == parameterUsername) {
             document.getElementById('about-me-form').classList.remove('hidden');
           }
@@ -51,7 +50,7 @@ function showMessageFormIfLoggedIn() {
       });
 }
 function fetchImageUploadUrlAndShowForm() {
-  fetch('/image-upload-url')
+  fetch('/image-upload-url?recipient=' + parameterUsername)
     .then((response) => {
       return response.text();
     })
