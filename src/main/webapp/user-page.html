@@ -23,29 +23,8 @@ limitations under the License. Testing the CloudBuild
     <link rel="stylesheet" href="/css/user-page.css">
     <link rel="stylesheet" href="/css/message-board.css">
     <script src="/js/user-page-loader.js"></script>
-    <style>
-      body{
-        background-image: url("bg.jpg"); 
-      }
-      li {
-        float: left;
-      }
-
-      li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-      }
-      
-      #page-title{
-        color: white;
-      }
-      
-
-    </style>
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhWNDhXcbviYWwpu1Ksf5u0fZnHpW5c3E"></script>
   </head>
   <body onload="buildUI();">
     <nav>
@@ -53,8 +32,6 @@ limitations under the License. Testing the CloudBuild
         <li><a href="/">Home</a></li>
       </ul>
     </nav>
-    <hr style="width: 1440px">
-  
     <h1 id="page-title">User Page</h1>
     <div id="about-me-container">Loading...</div>
     <div id="about-me-form" class="hidden">
@@ -72,19 +49,19 @@ limitations under the License. Testing the CloudBuild
           <input type="text" name="my-interest">
         <br>
         <input type="submit" value="Submit">
-      </form> 
+      </form>
 
       <div>
         <h1>These are your interests:</h1>
         <div id="interest-container">Loading...</div>
       </div>
     </div>
-    
+
     <div class = "black-text">
         <form id="message-form" action="/messages" method="POST" class="hidden">
           Enter a new message:
           <br/>
-          <textarea name="text" id="message-input"></textarea>
+          <textarea name="text" class="message-input" id="message-input"></textarea>
           <script>ClassicEditor.create( document.getElementById('message-input') );</script>
           <br/>
           Add an image to your message:
@@ -95,5 +72,6 @@ limitations under the License. Testing the CloudBuild
     </div>
     <hr/>
     <div id="message-container">Loading...</div>
+    <div class ="map" id = "map"></div>
   </body>
 </html>
