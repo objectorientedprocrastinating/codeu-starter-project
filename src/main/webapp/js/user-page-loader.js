@@ -37,20 +37,18 @@ function setPageTitle() {
  */
 function showMessageFormIfLoggedIn() {
   fetch('/login-status')
-    .then((response) => {
-      return response.json();
-    })
-    .then((loginStatus) => {
-      if (loginStatus.isLoggedIn &&
-        loginStatus.username == parameterUsername) {
-        const messageForm = document.getElementById('message-form');
-        fetchImageUploadUrlAndShowForm()
-        messageForm.action = '/messages?recipient=' + parameterUsername;
-        fetchImageUploadUrlAndShowForm();
-        messageForm.classList.remove('hidden');
-      }
-    });
-  document.getElementById('about-me-form').classList.remove('hidden');
+      .then((response) => {
+        return response.json();
+      })
+      .then((loginStatus) => {
+        if (loginStatus.isLoggedIn) {
+          fetchImageUploadUrlAndShowForm();
+          message.action += "?recipient=" +parameterUsername;
+          if (loginStatus.username == parameterUsername) {
+            document.getElementById('about-me-form').classList.remove('hidden');
+          }
+        }
+      });
 }
 function fetchImageUploadUrlAndShowForm() {
   fetch('/image-upload-url')
@@ -67,23 +65,22 @@ function fetchImageUploadUrlAndShowForm() {
 function fetchMessages() {
   const url = '/messages?user=' + parameterUsername;
   fetch(url)
-    .then((response) => {
-      return response.json();
-    })
-    .then((messages) => {
-      const messagesContainer = document.getElementById('message-container');
-      if (messages.length == 0) {
-        messagesContainer.innerHTML = '<p>This user has no posts yet.</p>';
-      } else {
-        messagesContainer.innerHTML = '';
-      }
-      messages.forEach((message) => {
-        const messageDiv = buildMessageDiv(message);
-        messagesContainer.appendChild(messageDiv);
+      .then((response) => {
+        return response.json();
+      })
+      .then((messages) => {
+        const messagesContainer = document.getElementById('message-container');
+        if (messages.length == 0) {
+          messagesContainer.innerHTML = '<p>This user has no posts yet.</p>';
+        } else {
+          messagesContainer.innerHTML = '';
+        }
+        messages.forEach((message) => {
+          const messageDiv = buildMessageDiv(message);
+          messagesContainer.appendChild(messageDiv);
+        });
       });
-    });
 }
-
 /**
  * Builds an element that displays the message.
  * @param {Message} message
@@ -93,7 +90,7 @@ function buildMessageDiv(message) {
   const headerDiv = document.createElement('div');
   headerDiv.classList.add('message-header');
   headerDiv.appendChild(document.createTextNode(
-    message.user + ' - ' + new Date(message.timestamp)));
+      message.user + ' - ' + new Date(message.timestamp)));
 
   const bodyDiv = document.createElement('div');
   bodyDiv.classList.add('message-body');
@@ -111,28 +108,32 @@ function buildMessageDiv(message) {
   return messageDiv;
 }
 
-function fetchInterests(){
+function fetchInterests() {
   const url = '/interest?user=' + parameterUsername;
-  fetch(url).then((response) => {
-    return response.text();
-   }).then((interest)=> {
-    var interestContainer = document.getElementById('interest-container');
-    interestContainer.innerHTML = interest;
-   });
+  fetch(url)
+      .then((response) => {
+        return response.text();
+      })
+      .then((interest) => {
+        var interestContainer = document.getElementById('interest-container');
+        interestContainer.innerHTML = interest;
+      });
 }
 
 
 function fetchAboutMe() {
   const url = '/about?user=' + parameterUsername;
-  fetch(url).then((response) => {
-    return response.text();
-  }).then((aboutMe) => {
-    const aboutMeContainer = document.getElementById('about-me-container');
-    if (aboutMe == '') {
-      aboutMe = 'This user has not entered any information yet.';
-    }
-    aboutMeContainer.innerHTML = aboutMe;
-  });
+  fetch(url)
+      .then((response) => {
+        return response.text();
+      })
+      .then((aboutMe) => {
+        const aboutMeContainer = document.getElementById('about-me-container');
+        if (aboutMe == '') {
+          aboutMe = 'This user has not entered any information yet.';
+        }
+        aboutMeContainer.innerHTML = aboutMe;
+      });
 }
 
 function createMap(){
@@ -239,4 +240,3 @@ function buildUI() {
   createMap();
   fetchInterests();
 }
-

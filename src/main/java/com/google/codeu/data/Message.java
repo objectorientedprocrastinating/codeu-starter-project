@@ -30,8 +30,8 @@ public class Message {
    * Constructs a new {@link Message} posted by {@code user} with {@code text} content to {@code
    * recipient}. Generates a random ID and uses the current system time for the creation time.
    */
-  public Message(String user, String text, String recipient, String imageUrl) {
-    this(UUID.randomUUID(), user, text, System.currentTimeMillis(), recipient, imageUrl);
+  public Message(String user, String text, String recipient) {
+    this(UUID.randomUUID(), user, text, System.currentTimeMillis(), recipient, null);
   }
 
   /**
@@ -53,6 +53,7 @@ public class Message {
     this.recipient = recipient;
     this.imageUrl = imageUrl;
   }
+
 
   /**
    * Returns current non-null UUID.
@@ -99,17 +100,18 @@ public class Message {
     return recipient;
   }
 
-  /** Sets current imageUrl. */
-  public void setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
-  }
+ /** Sets the image url associated with this message, if any. */
+ public void setImageUrl(String imageUrl) {
+  this.imageUrl = imageUrl;
+}
 
-  /**
-   * Returns the imageUrl.
-   *
-   * @return imageUrl
-   */
-  public Object getImageUrl() {
-    return imageUrl;
-  }
+/**
+ * Returns the image url associated with the current message.
+ *
+ * @return a (possibly null) string url.
+ */
+public String getImageUrl() {
+  return imageUrl;
+}
+
 }
