@@ -24,7 +24,7 @@ limitations under the License.
     <script src="/js/navigation-loader.js"></script>
     <style>
       div{
-        width: 100%;
+        width: 1440px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -43,12 +43,11 @@ limitations under the License.
       }
 
       body{
-        max-width: 100%;
-        padding: 20px;
+        
       }
       h1{
         color:black;
-        font-size: 40px;
+        font-size: 40px
       }
       p{
         color: white;
@@ -61,7 +60,7 @@ limitations under the License.
         background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/hero.jpg");
 
         /* Set a specific height */
-        height: 400%;
+        height: 100%;
 
         /* Position and center the image to scale nicely on all screens */
         background-position: center;
@@ -77,28 +76,14 @@ limitations under the License.
     </style>
   </head>
   <body onload="addLoginOrLogoutLinkToNavigation();">
-    <nav>
-      <ul id="navigation">
-        <li><a href="/">Home</a></li>
-      </ul>
-    </nav>
-    <hr style="width: 100%">
-    <div class="hero-image">
-      <div class="hero-text">
-        <h1>TRAVEL</h1>
-        <p>Explore the world together!!</p>
-      </div>
-    <div>
-    <p>Learn more!</p>
-    <div className="section"> 
-
+    <p>About</p>
+    <div id="about-me-container">Loading...</div>
+    <div id="about-me-form" class="hidden">
+      <form action="/about" method="POST">
+        <textarea name="about-me" placeholder="about me" rows=4 required></textarea>
+        <br/>
+        <input type="submit" value="Submit">
+      </form>
     </div>
-
-    <div className="section"> 
-
-    </div>
-    
-
-
   </body>
 </html>

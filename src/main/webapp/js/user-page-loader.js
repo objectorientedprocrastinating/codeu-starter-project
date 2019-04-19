@@ -42,8 +42,10 @@ function showMessageFormIfViewingSelf() {
         loginStatus.username == parameterUsername) {
         fetchImageUploadUrlAndShowForm();
         const messageForm = document.getElementById('message-form');
+        const messageForm1 = document.getElementById('message');
         //messageForm.action = '/messages?recipient=' + parameterUsername;
-        // messageForm.classList.remove('hidden');
+        messageForm.classList.remove('hidden');
+        messageForm1.classList.remove('hidden');
       }
     });
   document.getElementById('about-me-form').classList.remove('hidden');
@@ -54,8 +56,8 @@ function fetchImageUploadUrlAndShowForm() {
       return response.text();
     })
     .then((imageUploadUrl) => {
-      const messageForm = document.getElementById('message-form');
-      messageForm.action = imageUploadUrl;
+      const messageForm = document.getElementById('message');
+      //messageForm.action = imageUploadUrl;
       messageForm.classList.remove('hidden');
     });
 }
@@ -106,14 +108,15 @@ function buildMessageDiv(message) {
   return messageDiv;
 }
 
-function fetchInterests(){
+function fetchInterests() {
   const url = '/interest?user=' + parameterUsername;
   fetch(url).then((response) => {
     return response.text();
-   }).then((interest)=> {
+  }).then((interest) => {
     var interestContainer = document.getElementById('interest-container');
     interestContainer.innerHTML = interest;
-   });
+    interestContainer.classList.remove('hidden');
+  });
 }
 
 
@@ -127,6 +130,7 @@ function fetchAboutMe() {
       aboutMe = 'This user has not entered any information yet.';
     }
     aboutMeContainer.innerHTML = aboutMe;
+    aboutMeContainer.classList.remove('hidden');
   });
 }
 
@@ -134,9 +138,39 @@ function fetchAboutMe() {
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
   setPageTitle();
-  showMessageFormIfViewingSelf();
-  fetchMessages();
+  // showMessageFormIfViewingSelf();
+  // fetchMessages();
   fetchAboutMe();
-  fetchInterests();
+  // fetchInterests();
+}
+function onAboutClick() {
+  var messageForm = document.getElementById('message');
+  messageForm.classList.add('hidden');
+  var interestContainer = document.getElementById('interest');
+  interestContainer.classList.add('hidden');
+  fetchAboutMe();
+  console.log("about")
+
 }
 
+function onMessagesClick() {
+  var interestContainer = document.getElementById('interest');
+  interestContainer.classList.add('hidden');
+  const about = document.getElementById('about');
+  about.classList.add('hidden');
+  showMessageFormIfViewingSelf();
+  fetchMessages();
+  console.log("message")
+
+}
+
+function onInterestClick() {
+  var messageForm = document.getElementById('message');
+  messageForm.classList.add('hidden');
+  var about = document.getElementById('about');
+  about.classList.add('hidden');
+  fetchInterests();
+  console.log("interest")
+
+
+}
