@@ -41,18 +41,30 @@ function showMessageFormIfLoggedIn() {
       return response.json();
     })
     .then((loginStatus) => {
-      if (loginStatus.isLoggedIn) {
+      if (loginStatus.isLoggedIn &&
+        loginStatus.username == parameterUsername) {
         const messageForm = document.getElementById('message-form');
+        fetchImageUploadUrlAndShowForm()
         messageForm.action = '/messages?recipient=' + parameterUsername;
+        fetchImageUploadUrlAndShowForm();
         messageForm.classList.remove('hidden');
       }
     });
   document.getElementById('about-me-form').classList.remove('hidden');
 }
-
+function fetchImageUploadUrlAndShowForm() {
+  fetch('/image-upload-url')
+    .then((response) => {
+      return response.text();
+    })
+    .then((imageUploadUrl) => {
+      const messageForm = document.getElementById('message-form');
+      messageForm.action = imageUploadUrl;
+      messageForm.classList.remove('hidden');
+    });
+}
 /** Fetches messages and add them to the page. */
 function fetchMessages() {
-
   const url = '/messages?user=' + parameterUsername;
   fetch(url)
     .then((response) => {
@@ -69,21 +81,9 @@ function fetchMessages() {
         const messageDiv = buildMessageDiv(message);
         messagesContainer.appendChild(messageDiv);
       });
-
     });
 }
 
-function fetchImageUploadUrlAndShowForm() {
-  fetch('/image-upload-url')
-    .then((response) => {
-      return response.text();
-    })
-    .then((imageUploadUrl) => {
-      const messageForm = document.getElementById('message-form');
-      messageForm.action = imageUploadUrl;
-      messageForm.classList.remove('hidden');
-    });
-}
 /**
  * Builds an element that displays the message.
  * @param {Message} message
@@ -103,6 +103,10 @@ function buildMessageDiv(message) {
   messageDiv.classList.add('message-div');
   messageDiv.appendChild(headerDiv);
   messageDiv.appendChild(bodyDiv);
+  if (message.imageUrl) {
+    bodyDiv.innerHTML += '<br/>';
+    bodyDiv.innerHTML += '<img src="' + message.imageUrl + '" />';
+  }
 
   return messageDiv;
 }
